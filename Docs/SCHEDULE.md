@@ -6,7 +6,7 @@
     * Welcome, Expectations, Connectivity and environment setup.
 
 * 9am -> 10am (With 15 min break) (containers)
-	* Exercise - lets deploy our first workload
+	* Exercise - lets deploy our [first workload](../Exercises/Build/FIRSTWORKLOAD.md)
 	* Discussion - Linux kernel, namespaces, etc.
 	* Exercise - docker-compose (Builder) why is it important to work with containers as apposed to running local?
 	* Exercise - docker-compose (Breaker) here's what you can do in an improperly configured Dev. Env.
