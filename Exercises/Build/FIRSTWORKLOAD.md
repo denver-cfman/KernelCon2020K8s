@@ -28,6 +28,7 @@ $ docker run -d --rm --name httpbin -p 8888:80 kennethreitz/httpbin
 This will start the "httpbin" image, map a local tcp port "8888" to it's inner tcp port "80" and give it a name of "httpbin".
 
 Command breakdown
+
 Option | Meaning | Note
 --- | --- | ---
 run | start or "run" the container | if you do not "pull" the image first, "run" will also pull the image as well.
