@@ -1,10 +1,10 @@
 # Our First Workload
 
-## Once you have valadated that docker is installed currently running
+## Once you have validated that docker is installed and currently running
 ```bash
 $ docker info
 ```
-## we will download a sample container and verify that it is running within your lab envirnment.
+## we will download a sample container and verify that it is running within your lab environment.
 
 First we will download the container image:
 ```bash
