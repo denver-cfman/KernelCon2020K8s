@@ -1,5 +1,5 @@
 ## Class time 8am -> 5pm. 7.5 hours 
-### This time is based on last years' time, this could change but some assumptions have been made.
+### This time is based on last years' time. This could change but some assumptions have been made.
 
 
 * 8am -> 9am
@@ -8,14 +8,14 @@
 * 9am -> 10am (With 15 min break) (containers)
 	* [Exercise](../Exercises/Build/FIRSTWORKLOAD.md) - lets deploy our [first workload](../Exercises/Build/FIRSTWORKLOAD.md)
 	* Discussion - Linux kernel, namespaces, etc.
-	* Exercise - docker-compose (Builder) why is it important to work with containers as apposed to running local?
-	* Exercise - docker-compose (Breaker) here's what you can do in an improperly configured Dev. Env.
-	* Exercise - docker-compose (Defender) how to secure your Dev. Environment.
+	* Exercise - docker-compose (Builder)-  Why is it important to work with containers as opposed to running local?
+	* Exercise - docker-compose (Breaker) - Here's what you can do in an improperly configured Dev. Env.
+	* Exercise - docker-compose (Defender) - How to secure your Dev. Environment.
 	
 * 10am -> 11am
 	* Exercise - Image packaging, scanning and storage.
 	* Exercise - managing attack surface
-	* Exercise - What the heck is this swarm thing and why should I know about it in a k8s course?
+	* Exercise - What is this "swarm thing" and why should I know about it in a k8s course?
 	* Exercise - k8s infrastructure basics: apiserver, dns, resource types, etc.
 	* Exercise - common tools and commands
 	* Exercise - common environments and their differences (bare metal, GKE, EKS, AKS)
