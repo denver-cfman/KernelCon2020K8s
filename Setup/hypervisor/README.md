@@ -19,6 +19,7 @@
 The asumption is that you have a working *64bit* system you can install one of these hypervisers on (or already have installed). If you wish to install the binaries for this course on your own, please follow [This guide insted](../BININSTALL.md)
 
 ## Once you have a running hypervisor (VMWare Player or VirtualBox) please download the class "OVA image" below.
+
 The downloadable OVA file is [Here](https://drive.google.com/file/d/1kt0KGFhEnSbe39AdkQvTtq8Q7iawjdGd/view?usp=sharing)
 
 
