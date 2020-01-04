@@ -4,12 +4,12 @@
 
 ## Kubernetes: Build, Break, Defend!
 
-Info | Relevent Area | Status
---- | --- | ---
-Setup | [Setup](Setup/README.md) | InProgress
-Docs | [Docs](Docs/README.md) | InProgress
-Exercises | [Exercises](Exercises/README.md) | InProgress
-Presentations | [Presentations](Presentations/README.md) | InProgress
+Relevent Area | Status
+--- | ---
+[Setup](Setup/README.md)                 | [![](https://img.shields.io/badge/Status-InProgress-f39f37)](Setup/README.md)
+[Docs](Docs/README.md)                   | [![](https://img.shields.io/badge/Status-InProgress-f39f37)](Docs/README.md)
+[Exercises](Exercises/README.md)         | [![](https://img.shields.io/badge/Status-InProgress-f39f37)](Exercises/README.md)
+[Presentations](Presentations/README.md) | [![](https://img.shields.io/badge/Status-InProgress-f39f37)](Presentations/README.md)
 
-## Please reference these links when "hopping around" in the repo.
+## Please reference these links when "jumping around" in the repo.
 #### Markdown guide available [here](https://guides.github.com/features/mastering-markdown/)
