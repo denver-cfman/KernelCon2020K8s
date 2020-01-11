@@ -21,7 +21,7 @@ python                                 <none>              4ae385ba9dd2        5
 nginx                                  <none>              e445ab08b2be        5 months ago        126MB
 kennethreitz/httpbin                   latest              b138b9264903        14 months ago       534MB
 ```
-Now we can "run" this image by involking our "container runtime" like this, with some basic options.
+Now we can "run" this image by invoking our "container runtime" like this, with some basic options.
 ```bash
 $ docker run -d --rm --name httpbin -p 8888:80 kennethreitz/httpbin
 ```
