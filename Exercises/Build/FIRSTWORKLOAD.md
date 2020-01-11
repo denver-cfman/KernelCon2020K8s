@@ -10,7 +10,7 @@ First we will download the container image:
 ```bash
 $ docker pull kennethreitz/httpbin
 ```
-if sucsesful, you should now see this image in your "container runtime" image inventory.
+if successful, you should now see this image in your "container runtime" image inventory.
 ```bash
 $ docker images
 ```
