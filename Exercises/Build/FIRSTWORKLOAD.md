@@ -32,7 +32,7 @@ Command breakdown
 Option | Meaning | Note
 --- | --- | ---
 run | start or "run" the container | if you do not "pull" the image first, "run" will also pull the image as well.
--d | run in deamon mode | non interactive, run in background.
+-d | run in daemon mode | non interactive, run in background.
 --rm | remove the runtime container after it is stopped | if ommited you would have to do "*docker stop httpbin*" AND "*docker rm httpbin*" to free resources etc.
 --name | name this container | if ommited the runtim will make up an odd name that you will have to search for via "*docker ps -a*" before you can "*docker stop*" or "*docker rm*"
 -p | port mapping | take the local tcp port *8888* and map it to the container network port of *80*
