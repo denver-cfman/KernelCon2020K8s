@@ -14,7 +14,7 @@ if sucsesful, you should now see this image in your "container runtime" image in
 ```bash
 $ docker images
 ```
-the output will look something simior to this:
+the output will look something similar to this:
 ```bash
 python                                 <none>              5b0283c5034b        5 months ago        169MB
 python                                 <none>              4ae385ba9dd2        5 months ago        909MB
