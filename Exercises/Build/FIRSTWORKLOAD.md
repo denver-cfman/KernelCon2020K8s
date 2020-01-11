@@ -36,7 +36,7 @@ run | start or "run" the container | if you do not "pull" the image first, "run"
 --rm | remove the runtime container after it is stopped | if omitted you would have to do "*docker stop httpbin*" AND "*docker rm httpbin*" to free resources etc.
 --name | name this container | if omitted the runtime will make up an odd name that you will have to search for via "*docker ps -a*" before you can "*docker stop*" or "*docker rm*"
 -p | port mapping | take the local tcp port *8888* and map it to the container network port of *80*
-kennethreitz/httpbin | the name of the image to *run* | you may also defign a version like *kennethreitz/httpbin:latest* or speciffic hash *kennethreitz/httpbin:sha256:b138b9264903f46a43e1c750e07dc06f5d2a1bd5d51f37fb185bc608f61090dd* this can be helpful if you need to *pin* a very speciffic version of an image to be used (recomended)
+kennethreitz/httpbin | the name of the image to *run* | you may also define a version like *kennethreitz/httpbin:latest* or specific hash *kennethreitz/httpbin:sha256:b138b9264903f46a43e1c750e07dc06f5d2a1bd5d51f37fb185bc608f61090dd* this can be helpful if you need to *pin* a very specific version of an image to be used (recomended)
 
 ### Now that your test workload is up and running, try to access it.
 ```bash
