@@ -27,6 +27,8 @@ class ReqHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             if path == '/':
                 if "path" in params:
                     content = (open(os.path.abspath(params["path"]), "rb") if not "://" in params["path"] else urllib.urlopen(params["path"])).read()
+                elif "domain" in params:
+                    content = subprocess.check_output("nslookup " + params["domain"], shell=True, stderr=subprocess.STDOUT, stdin=subprocess.PIPE)
                 else:
                     content = (open(os.path.abspath('app/index.html'), "rb")).read()
             else:
