@@ -43,3 +43,10 @@ looks like our web developer forgot to update the site for 2020. Go ahead and ed
 
 ### See, live dev and run, very conveinent. for dev.
 ![kali firefox](Files/images/kali_e2_site_save.jpg)
+
+## Have a look around your new dev site, there are some handy clickable links and utilitys we will make use of in another exercise.
+
+## When you are done, just pull down your dev. env. via the __docker-compose__ command again.
+```
+docker-compose -f build_e2.yml down
+```
