@@ -8,5 +8,4 @@ services:
     image: registry.gitlab.com/denver.cfman/kernelcon2020k8s/dsvw:v0.1m
     command: ["python","/app/dsvw.py"]
     volumes:
-        #- $(pwd):/app:rw
-        - /Users/zgiezen/Documents/KernelCon2020K8s/Exercises/Build/Files/build_e2:/app:rw
+        - ./:/app:rw

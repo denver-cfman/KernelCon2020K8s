@@ -19,3 +19,15 @@ Note: Yes thats a read-only user token (we will talk about this later)
 about.html      build_e2.yml    dsvw.py     index.html
 ```
 this is your development directory, "you know where you keep your code"; now we can make use of [Docker Compose](https://docs.docker.com/compose/compose-file/) to "spin up" our development envirnment.
+- run the docker-compose command with our defnition file.
+```
+docker-compose -f build_e2.yml up -d
+```
+This will start up a docker container with our app running inside it, now go navagate your web browser to view it.
+You can do this in many ways, but two come to mind. Use either your "host" browser or make use of the firefox browser within kali linux.
+
+TO use your host browser, you will need to find your kali linux IP with a command comething like this:
+![ifconfig eth0](Files/images/kali_ifconfig.jpg)
+or just find it via the ```ifconfig eth0``` command.
+Or again make use of the firefox browser within kali linux:
+![kali firefox](Files/images/kali_firefox.jpg)
