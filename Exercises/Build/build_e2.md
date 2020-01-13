@@ -31,3 +31,10 @@ TO use your host browser, you will need to find your kali linux IP with a comman
 or just find it via the ```ifconfig eth0``` command.
 Or again make use of the firefox browser within kali linux:
 ![kali firefox](Files/images/kali_firefox.jpg)
+Then navaget to your new dev site: ```http://127.0.0.1:1234```
+![kali firefox](Files/images/kali_e2_site.jpg)
+Or use your Host browser if you want ```http://<kali ip>:1234/```
+
+## Oops ...
+looks like our web developer forgot to update the site for 2020. Go ahead and edit the file __index.html__ with a program like __mousepad__ or __vi__ (sorry __emacs__ is not installed on kali by default). Then just refresh your browser.
+### See, live dev and run, very conveinent. for dev.
