@@ -51,4 +51,4 @@ looks like our web developer forgot to update the site for 2020. Go ahead and ed
 docker-compose -f build_e2.yml down
 ```
 
-[Return to schedule](Docs/SCHEDULE.md)
+[Return to schedule](../../Docs/SCHEDULE.md)
