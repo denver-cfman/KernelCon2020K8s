@@ -20,6 +20,16 @@ The asumption is that you have a working *64bit* system you can install one of t
 
 ## Once you have a running hypervisor (VMWare Player or VirtualBox) please download the class "OVA image" below.
 
-The downloadable OVA file is [Here](https://drive.google.com/file/d/1fqhNfukZyvt3EM8WZgi5YJYjhuuT489e/view?usp=sharing)
+# The downloadable OVA file is [Here](https://drive.google.com/file/d/1fqhNfukZyvt3EM8WZgi5YJYjhuuT489e/view?usp=sharing)
 
+Once you have downloaded your .ova file you will need to import it into Virtualbox.
+- Select the __File__ main menu, then __Import Appliance__ from the menu.
+![Menu Select](../Files/images/s1.jpg)
+- __Source__ should remain __Local File System__ then click on the *browse* icon next to __File__.
+![File Selete](../Files/images/s2.jpg)
+- Locate your downloaded file and hit Open.
+![File Selete](../Files/images/s5.jpg)
+- Please make sure to select __Generate new MAC addresses for all network adapters__ form the __MAC Address Policy:__ option before clicking the __Import__ button.
+![File Selete](../Files/images/s3.jpg)
 
+## Again this is a *Stock* [Kali Linux](https://www.kali.org/downloads/) image only edited to *add* the needed binaries for this course to make setup faster, you may wish to set it up your self via [this guide](../Setup/BININSTALL.md) insted.
