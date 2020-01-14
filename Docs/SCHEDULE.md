@@ -8,7 +8,7 @@
 * 9am -> 10am (With 15 min break) (containers)
 	* [Exercise](../Exercises/Build/FIRSTWORKLOAD.md) - lets deploy our [first workload](../Exercises/Build/FIRSTWORKLOAD.md)
 	* Discussion - Linux kernel, namespaces, etc.
-	* Exercise - docker-compose (Builder)-  Why is it important to work with containers as opposed to running local?
+	* [Exercise](../Exercises/Build/build_e2.md) - [docker-compose (Builder)](../Exercises/Build/build_e2.md)-  Why is it important to work with containers as opposed to running local?
 	* Exercise - docker-compose (Breaker) - Here's what you can do in an improperly configured Dev. Env.
 	* Exercise - docker-compose (Defender) - How to secure your Dev. Environment.
 	
