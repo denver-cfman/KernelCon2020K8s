@@ -9,8 +9,8 @@
 	* [Exercise](../Exercises/Build/FIRSTWORKLOAD.md) - lets deploy our [first workload](../Exercises/Build/FIRSTWORKLOAD.md)
 	* Discussion - Linux kernel, namespaces, etc.
 	* [Exercise](../Exercises/Build/build_e2.md) - [docker-compose (Builder)](../Exercises/Build/build_e2.md)-  Why is it important to work with containers as opposed to running local?
-	* Exercise - docker-compose (Breaker) - Here's what you can do in an improperly configured Dev. Env.
-	* Exercise - docker-compose (Defender) - How to secure your Dev. Environment.
+	* [Exercise](../Exercises/Break/break_e3.md) - [docker-compose (Breaker)](../Exercises/Break/break_e3.md)- Here's what you can do in an improperly configured Dev. Env.
+	* [Exercise](../Exercises/Defend/defend_e4.md) - [docker-compose (Defender)](../Exercises/Defend/defend_e4.md) - How to secure your Dev. Environment.
 	
 * 10am -> 11am
 	* Exercise - Image packaging, scanning and storage.
