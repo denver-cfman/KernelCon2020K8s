@@ -1,0 +1,11 @@
+version: "3.7"
+services:
+  dsvw:
+    cap_add:
+        - ALL
+    ports:
+        - "1234:8000"
+    image: registry.gitlab.com/denver.cfman/kernelcon2020k8s/dsvw:v0.1m
+    command: ["python","/app/dsvw.py"]
+    volumes:
+        - ./:/app:rw
