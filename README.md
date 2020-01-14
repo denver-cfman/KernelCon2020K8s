@@ -13,3 +13,11 @@ Relevent Area | Status
 
 ## Please reference these links when "jumping around" in the repo.
 #### Markdown guide available [here](https://guides.github.com/features/mastering-markdown/)
+
+## For easy setup just do:
+```
+git clone git@github.com:denver-cfman/KernelCon2020K8s.git
+cd KernelCon2020K8s
+pip install grip
+grip . --title="KernelCon 2020 Kubernetes Training" -b --quiet
+```
