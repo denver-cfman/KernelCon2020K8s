@@ -15,7 +15,6 @@
 * 10am -> 11am
 	* Exercise - Image packaging, scanning and storage.
 	* Exercise - managing attack surface
-	* Exercise - What is this "swarm thing" and why should I know about it in a k8s course?
 	* Exercise - k8s infrastructure basics: apiserver, dns, resource types, etc.
 	* Exercise - common tools and commands
 	* Exercise - common environments and their differences (bare metal, GKE, EKS, AKS)
