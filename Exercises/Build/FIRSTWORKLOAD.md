@@ -67,3 +67,5 @@ $ docker stop httpbin
 this will free up docker resources, so you can move on to other exercises.
 
 ## Congratulations, you have completed your first exercise "Our First Workload"
+
+[Return to schedule](../../Docs/SCHEDULE.md)
