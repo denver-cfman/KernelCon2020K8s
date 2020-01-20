@@ -1,0 +1,13 @@
+{
+    "name": "kernelcon2020_web_app",
+    "version": "0.0.1",
+    "description": "Node.js on Docker for Kernelcon 2020 K8s Training",
+    "author": "Zach Giezen denver.cfman@gmail.com",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "dependencies": {
+      "express": "^4.16.1"
+    }
+  }
