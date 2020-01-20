@@ -14,7 +14,7 @@
 	
 * 10am -> 11am
 	* [Exercise](../Exercises/Build/build_e5.md) - [Image packaging, scanning and storage](../Exercises/Build/build_e5.md).
-	* Exercise - managing attack surface
+	* [Exercise](../Exercises/Defend/defend_e6.md) - [managing attack surface](../Exercises/Defend/defend_e6.md)
 	* Exercise - k8s infrastructure basics: apiserver, dns, resource types, etc.
 	* Exercise - common tools and commands
 	* Exercise - common environments and their differences (bare metal, GKE, EKS, AKS)
