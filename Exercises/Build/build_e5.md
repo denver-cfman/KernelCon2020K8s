@@ -136,10 +136,19 @@ cd microscanner-wrapper-master/
 ```
 echo "{" >> hello-kernelcon.json && USE_LOCAL=1 MICROSCANNER_TOKEN=xxxxxxxxxxxxxxxx ./grabjson.sh localhost:5000/hello-kernelcon:latest >> hello-kernelcon.json 
 ```
-### Note: output can be put into html files or integrated with CI/CD systems as well to automate this type of scanning.
+#### Note: output can be put into html files or integrated with CI/CD systems as well to automate this type of scanning.
 - now view the results
 ```
 cat hello-kernelcon.json |jq '.resources[].vulnerabilities[] | [.name,.description]'
 ```
 
 ## Wait, What, all we did was add a text file, why are there so many vulnrabilitys?
+#### When we built our image we made use of a large distro base __ubuntu__ You will see in our next exercise  you will see techneuques used to reduce or in some cases completly remove aditional un needed files that clutter up our deployable images.
+
+# Review:
+### In this exercise we went breafly into creating container images, storage of them, both (local and remote) as well as scanning them once they are built. These are core concepts to know as we transition form container speciffic exercisies into orchastrasion speciffic exercises.
+
+## Clean up:
+#### please leave your local registry running as well as the scanning files in place as we will make use of them in future exercises.
+ 
+[Return to schedule](../../Docs/SCHEDULE.md)
