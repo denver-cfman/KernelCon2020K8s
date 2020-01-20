@@ -13,7 +13,7 @@
 	* [Exercise](../Exercises/Defend/defend_e4.md) - [docker-compose (Defender)](../Exercises/Defend/defend_e4.md) - How to secure your Dev. Environment.
 	
 * 10am -> 11am
-	* Exercise - Image packaging, scanning and storage.
+	* [Exercise](../Exercises/Build/build_e5.md) - [Image packaging, scanning and storage](../Exercises/Build/build_e5.md).
 	* Exercise - managing attack surface
 	* Exercise - k8s infrastructure basics: apiserver, dns, resource types, etc.
 	* Exercise - common tools and commands
