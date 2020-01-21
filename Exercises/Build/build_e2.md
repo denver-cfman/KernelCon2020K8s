@@ -28,6 +28,7 @@ You can do this in many ways, but two come to mind: 1) Use either your "host" br
 
 To use your host browser (option 1), you will need to find your kali linux IP with a command something like this:
 ![ifconfig eth0](Files/images/kali_ifconfig.jpg)
+
 or just find it via the ```ifconfig eth0``` command.
 
 Or, using option 2), again make use of the firefox browser within kali linux:
