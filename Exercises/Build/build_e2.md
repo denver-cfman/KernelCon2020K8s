@@ -9,7 +9,7 @@ If you have not already done so, make sure to _login_ to the class docker regist
 ```
 # echo "Roxx3znazUWqjL56yoSz" | docker login --username denver.cfman@gmail.com --password-stdin registry.gitlab.com
 ```
-Note: Yes, that's a "'read-only'" user token (we will talk about this later)
+Note: Yes, that's a "read-only" user token (we will talk about this later)
 
 #### Here we go ...
 
