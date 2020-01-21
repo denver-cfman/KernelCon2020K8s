@@ -18,7 +18,7 @@
 - Edit the "Dockerfile" so it's contents look like this:
 ```
 FROM ubuntu:16.04
-CMD ["/bin/echo","Hello KernelCon 2020!"]
+CMD ["/bin/echo","Hello, KernelCon 2020!"]
 ```
 #### Note: Yes, I know that using "ubuntu:16.04" is WAY "overkill" for this image, but it is a setup for later :-)
 - Then, we build it
@@ -38,11 +38,11 @@ CMD ["/bin/echo","Hello KernelCon 2020!"]
 FROM ubuntu:16.04
 WORKDIR /
 COPY foo.txt .
-CMD ["/bin/echo","Hello KernelCon 2020!"]
+CMD ["/bin/echo","Hello, KernelCon 2020!"]
 ```
 - Now, you need to make a new file
 ```
- # echo "Hi There KernelCon 2020" >> foo.txt
+ # echo "Hi there, KernelCon 2020!" >> foo.txt
 ```
 - You need to __build__ it again via docker:
 ```
