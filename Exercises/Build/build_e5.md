@@ -5,13 +5,13 @@
 ## Preface: 
 
 ### Container runtime engines will store what are called "images", locally, once you have "fetched" them (remembering the ___docker pull___ exercise from before, when an image file was pulled down) which are "packages" of manifests and compressed files that all make up what is "mounted" by the container runtime. 
-### There are many commands that deal with images directly(i.e. ___docker pull___, ___docker diff___, ___docker inspect___, ___docker save___, ___docker load___, to name a few). Right now, we are looking at what it takes to create an image, store the image, and retrieve it. 
+### There are many commands that deal with images directly(i.e. ___docker pull___, ___docker diff___, ___docker inspect___, ___docker save___, ___docker load___, to name a few). Right now, we will be looking at what it takes to create an image, store the image, and retrieve it. 
 
-### Docker makes this easy with a scripted interface called "[Dockerfile](https://docs.docker.com/engine/reference/builder/)". Basically, the docker client will "read in" each line of this script and interpret it into specific actions needed to create or refine a specific image.
+### Docker makes this easy with a scripted interface called "[Dockerfile](https://docs.docker.com/engine/reference/builder/)". Basically, the docker client will "read in" each line of this script, and interpret it into specific actions needed to create or refine a specific image.
 
 ## Let's make one
 
-- make a new folder and create a new "Dockerfile"
+- Make a new folder and create a new "Dockerfile"
 ```
 # mkdir E5 && cd E5 && touch Dockerfile
 ```
@@ -21,7 +21,7 @@ FROM ubuntu:16.04
 CMD ["/bin/echo","Hello KernelCon 2020!"]
 ```
 #### Note: Yes, I know that using "ubuntu:16.04" is WAY "overkill" for this image, but it is a setup for later :-)
-- Then we build it
+- Then, we build it
 ```
 # docker build --tag hello-kernelcon .
 ```
@@ -32,8 +32,8 @@ CMD ["/bin/echo","Hello KernelCon 2020!"]
 ## What the heck just happened?
 ## Well, we instructed docker to "pull down" the "__latest__" image of __ubuntu__ (as a tar ball) and use it as the *base* of our new image, then we just used an existing binary which was already present in the image __echo__ (in this case), to display a message.
 
-## As we __ADD__ or __COPY__ content into our containers they are stored as additional *layers* in the *overlay* filesystem that makes up each __image__ and they become available to any process running within that container.   Let's do a very simple example:
-- edit your __Dockerfile__ again to look like this:
+## As we __ADD__ or __COPY__ content into our containers, they are stored as additional *layers* in the *overlay* filesystem that makes up each __image__, and they become available to any process running within that container.   Let's do a very simple example:
+- Edit your __Dockerfile__ again to look like this:
 ```
 FROM ubuntu:16.04
 WORKDIR /
@@ -62,7 +62,7 @@ df31d827354d        2 seconds ago       /bin/sh -c #(nop) COPY file:e211b2a00deb
 <missing>           4 days ago          /bin/sh -c rm -rf /var/lib/apt/lists/*          0B                  
 <missing>           4 days ago          /bin/sh -c #(nop) ADD file:4b2eb5cd0b37ca015…   124MB  
 ```
-## You should see the file copy within one of the new __layers__ you just created. Now, let's interact with it by __overriding__ the default command __/bin/echo__ (this is what you set in the earlier build).
+## You should see the file copy within one of the new __layers__ you just created. Now, let's interact with it by __overriding__ the default command __/bin/echo__ (This is what you set in the earlier build).
 ```
 # docker run --rm hello-kernelcon /bin/cat /foo.txt
 ```
@@ -70,7 +70,7 @@ df31d827354d        2 seconds ago       /bin/sh -c #(nop) COPY file:e211b2a00deb
 
 # Storage
 
-## Now, that's all well and good, but these __images__ are not worth much if we can share them between systems or with each other. Enter the "registry". Most people start with "official" images stored within the DTR (Docker Trusted Registry) or (Docker Hub). However, there is nothing stopping you from using __docker save__ on one system, then __docker load__, on another. In fact, this is exactly how many "air gapped" systems need to work. But in most cases, developers set up their own registry to store their images. A few of note are:
+## Now, that's all well and good, but these __images__ are not worth much if we can't share them between systems or with each other. Enter "the registry". Most people start with "official" images stored within the DTR (Docker Trusted Registry), or Docker Hub. However, there is nothing stopping you from using __docker save__ on one system, then __docker load__, on another. In fact, this is exactly how many "air-gapped" systems need to work. But, in most cases, developers set up their own registry to store their images. A few of note are:
 - [Docker Hub]()
 - [GitLab Container Registry]()
 - [Docker Registry](https://hub.docker.com/_/registry)
@@ -78,7 +78,7 @@ df31d827354d        2 seconds ago       /bin/sh -c #(nop) COPY file:e211b2a00deb
 - [Sonatype Nexus Repository Manager (OSS)](https://www.sonatype.com/nexus-repository-oss)
 - and many many more  ...
 
-## Let us set up our own
+## Let's set up our own registry
 - Run the docker command to "pull down", "start", and "host" a local registry.
 ```
 docker run -d -p 5000:5000 --restart=always --name registry registry:2
@@ -93,22 +93,22 @@ docker run -d -p 5000:5000 --restart=always --name registry registry:2
 ```
 # docker push localhost:5000/hello-kernelcon:latest
 ```
-- Now,  just for "grins and giggles", let's remove all local versions of this image and __pull it back down again__
+- Now, just for "grins and giggles", let's remove all of the local versions of this image and __pull it back down again__
 ```
 # docker rmi localhost:5000/hello-kernelcon:latest
 
 # docker rmi hello-kernelcon:latest
 ```
-- Now, you can download and run it again (this time from the remote registry)
+- Now, you can download it and run it again (this time from the remote registry)
 ```
 # docker run --rm --name kernelcon localhost:5000/hello-kernelcon:latest
 ```
 
 # Scanning
 
-## As you have seen, Images are the base for all content used during execution of a container and are essential to container use. As you may already guess, trusting the content of this image is paramount to creating a secure environment. Therefore, we must constantly update and periodically  __scan__ the content of these __images__ to ensure they are safe and usable.  Some registries will automatically do this. _Nexus_, _JFrog_, and _Docker Hub_ do this with automated bots that scan images already stored in there registries. CI/CD systems can be made to review the results of these scanning tools' outputs and stop builds on bad scores. Or, you can review your output manualy, or "script up" a tool of your own.
+## As you have seen, "Images" are the base for all content used during execution of a container, and are essential to container use. As you may already guess, trusting the content of this image is essential to creating a secure environment. Therefore, we must constantly update and periodically  __scan__ the content of these __images__ to ensure they are both safe and usable.  Some registries will automatically do this. _Nexus_, _JFrog_, and _Docker Hub_ do this with automated bots that scan images already stored in their registries. CI/CD systems can be made to review the results of these scanning tools' outputs and stop builds on "bad" scores. Or, you can review your output manualy, or "script up" a tool of your own.
 
-### Manual scan walkthrough. Let's take our example image we just created; All we did was add a test file to the image...it should be safe, right? We didn't ADD any scary new "Zero-Day" malware into the image, so, we should be able to use it,  right? Let's see.
+### Manual scan walkthrough. Let's take our example image we just created; All we did was add a test file to the image...it should be safe, right? We didn't ADD any scary new "Zero-Day" malware into the image, so, we should be able to use it, right? Let's see.
 
 - For this exercise you may want to have __jq__ installed.
 ```
