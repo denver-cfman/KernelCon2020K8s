@@ -29,10 +29,10 @@ CMD ["/bin/echo","Hello, KernelCon 2020!"]
 ```
 # docker run --rm hello-kernelcon
 ```
-### What the heck just happened?
-### Well, we instructed docker to "pull down" the "__latest__" image of __ubuntu__ (as a tar ball) and use it as the *base* of our new image, then we just used an existing binary which was already present in the image "__echo__" (in this case), to display a message.
+#### What the heck just happened?
+#### Well, we instructed docker to "pull down" the "__latest__" image of __ubuntu__ (as a tar ball) and use it as the *base* of our new image, then we just used an existing binary which was already present in the image "__echo__" (in this case), to display a message.
 
-### As we __ADD__ or __COPY__ content into our containers, they are stored as additional *layers* in the *overlay* filesystem that makes up each __image__, and they become available to any process running within that container.   Let's do a very simple example:
+#### As we __ADD__ or __COPY__ content into our containers, they are stored as additional *layers* in the *overlay* filesystem that makes up each __image__, and they become available to any process running within that container.   Let's do a very simple example:
 - Edit your __Dockerfile__ again to look like this:
 ```
 FROM ubuntu:16.04
@@ -62,15 +62,15 @@ df31d827354d        2 seconds ago       /bin/sh -c #(nop) COPY file:e211b2a00deb
 <missing>           4 days ago          /bin/sh -c rm -rf /var/lib/apt/lists/*          0B                  
 <missing>           4 days ago          /bin/sh -c #(nop) ADD file:4b2eb5cd0b37ca015…   124MB  
 ```
-### You should see the file copy within one of the new __layers__ you just created. Now, let's interact with it by __overriding__ the default command __/bin/echo__ (This is what you set in the earlier build).
+#### You should see the file copy within one of the new __layers__ you just created. Now, let's interact with it by __overriding__ the default command __/bin/echo__ (This is what you set in the earlier build).
 ```
 # docker run --rm hello-kernelcon /bin/cat /foo.txt
 ```
-### We will read the file __foo.txt__ from inside the container image using a process __cat__ from inside the container image.
+#### We will read the file  __foo.txt__  from inside the container image using a process __cat__ from inside the container image.
 
 # Storage
 
-### Now, that's all well and good, but these __images__ are not worth much if we can't share them between systems or with each other. Enter "the registry". Most people start with "official" images stored within the DTR (Docker Trusted Registry), or Docker Hub. However, there is nothing stopping you from using ___docker save___ on one system, then ___docker load___, on another. In fact, this is exactly how many "air-gapped" systems need to work. But, in most cases, developers set up their own registry to store their images. A few of note are:
+#### Now, that's all well and good, but these __images__ are not worth much if we can't share them between systems or with each other. Enter "the registry". Most people start with "official" images stored within the DTR (Docker Trusted Registry), or Docker Hub. However, there is nothing stopping you from using ___docker save___ on one system, then ___docker load___, on another. In fact, this is exactly how many "air-gapped" systems need to work. But, in most cases, developers set up their own registry to store their images. A few of note are:
 - [Docker Hub]()
 - [GitLab Container Registry]()
 - [Docker Registry](https://hub.docker.com/_/registry)
@@ -84,7 +84,7 @@ df31d827354d        2 seconds ago       /bin/sh -c #(nop) COPY file:e211b2a00deb
 docker run -d -p 5000:5000 --restart=always --name registry registry:2
 ```
 ## Remote storage
-### Let's take that __hello-kernelcon__ image from earlier in the exercise, and store it in our remote registry.
+#### Let's take that __hello-kernelcon__ image from earlier in the exercise, and store it in our remote registry.
 - Tag the image for remote storage
 ```
 # docker tag hello-kernelcon:latest localhost:5000/hello-kernelcon:latest
@@ -106,9 +106,10 @@ docker run -d -p 5000:5000 --restart=always --name registry registry:2
 
 # Scanning
 
-### As you have seen, "images" are the base for all content used during execution of a container, and are essential to container use. As you may already guess, trusting the content of this image is essential to creating a secure environment. Therefore, we must constantly update, and periodically  __scan__, the content of these __images__ to ensure they are both safe and usable.  Some registries will automatically do this. ___Nexus___, ___JFrog___, and ___Docker Hub___ do this with automated bots that scan images already stored in their registries. CI/CD systems can be made to review the results of these scanning tools' outputs and stop builds on "bad" scores. Or, you can review your output manualy, or "script up" a tool of your own.
+#### As you have seen, "images" are the base for all content used during execution of a container, and are essential to container use. As you may already guess, trusting the content of this image is essential to creating a secure environment. Therefore, we must constantly update, and periodically  __scan__, the content of these __images__ to ensure they are both safe and usable.  Some registries will automatically do this. ___Nexus___, ___JFrog___, and ___Docker Hub___ do this with automated bots that scan images already stored in their registries. CI/CD systems can be made to review the results of these scanning tools' outputs and stop builds on "bad" scores. Or, you can review your output manualy, or "script up" a tool of your own.
 
-### Manual scan walkthrough. Let's take our example image we just created; All we did was add a test file to the image...it should be safe, right? We didn't ADD any scary new "Zero-Day" malware into the image, so, we should be able to use it, right? Let's see.
+### Manual scan walkthrough. 
+#### Let's take our example image we just created; All we did was add a test file to the image...it should be safe, right? We didn't ADD any scary new "Zero-Day" malware into the image, so, we should be able to use it, right? Let's see.
 
 - For this exercise you may want to have __jq__ installed.
 ```
@@ -142,13 +143,13 @@ echo "{" >> hello-kernelcon.json && USE_LOCAL=1 MICROSCANNER_TOKEN=xxxxxxxxxxxxx
 cat hello-kernelcon.json |jq '.resources[].vulnerabilities[] | [.name,.description]'
 ```
 
-### Wait!...What?...All we did was add a text file!... Why are there so many vulnerabilities?
+#### Wait!...What?...All we did was add a text file!... Why are there so many vulnerabilities?
 #### When we built our image, we made use of a large "distro" base __ubuntu__. You will see in our next exercise, techniques used to reduce, or in some cases completely remove, additional un-needed files that clutter up our deployable images.
 
 # Review:
-### In this exercise we went briefly into 1) how to create container images, 2) the storage of container images (both local and remote), as well as 3) scanning them once they are built. These are core concepts to know as we transition from "container-specific" exercises into "orchestration-specific" exercises.
+#### In this exercise we went briefly into 1) how to create container images, 2) the storage of container images (both local and remote), as well as 3) scanning them once they are built. These are core concepts to know as we transition from "container-specific" exercises into "orchestration-specific" exercises.
 
-## Clean up:
+# Clean up:
 #### Please leave your local registry running, as well as the scanning files "in-place", as we will make use of them in future exercises.
  
 [Return to schedule](../../Docs/SCHEDULE.md)
