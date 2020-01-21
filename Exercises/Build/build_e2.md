@@ -39,10 +39,10 @@ Then navigate to your new "dev" site: ```http://127.0.0.1:1234```
 Or, use your Host browser, if you want ```http://<kali ip>:1234/```
 
 ## Oops ...
-looks like our web developer forgot to update the site for 2020. Go ahead and edit the file __index.html__ with a program like __mousepad__ or __vi__ (sorry __emacs__ is not installed on kali by default). Then, just refresh your browser.
+It looks like you (the web developer) forgot to update the site for 2020. Go ahead and edit the file __index.html__ with a program like __mousepad__ or __vi__ (sorry __emacs__ is not installed on kali by default). Then, just refresh your browser.
 ![kali firefox](Files/images/kali_e2_site_edit.jpg)
 
-### See, "live" dev and run,...very convenient for developers.
+### See!  You now have a live "dev and run" environment,...this is very convenient for developers.
 ![kali firefox](Files/images/kali_e2_site_save.jpg)
 
 ## Have a look around your new dev site. There are some handy "clickable" links and utilities which you will use in another exercise.
