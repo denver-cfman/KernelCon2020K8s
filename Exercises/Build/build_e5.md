@@ -4,7 +4,7 @@
 
 ## Preface: 
 
-### Container runtime engines will store what are called "images", locally, once you have "fetched" them (remembering the ___docker pull___ exercise from before, when an image file was pulled down) which is a "package" of manifests and compressed files that all make up what is "mounted" by the container runtime. 
+### Container runtime engines will store what are called "images", locally, once you have "fetched" them (remembering the ___docker pull___ exercise from before, when an image file was pulled down) which are "packages" of manifests and compressed files that all make up what is "mounted" by the container runtime. 
 ### There are many commands that deal with images directly(i.e. ___docker pull___, ___docker diff___, ___docker inspect___, ___docker save___, ___docker load___, to name a few). Right now, we are looking at what it takes to create an image, store the image, and retrieve it. 
 
 ### Docker makes this easy with a scripted interface called "[Dockerfile](https://docs.docker.com/engine/reference/builder/)". Basically, the docker client will "read in" each line of this script and interpret it into specific actions needed to create or refine a specific image.
