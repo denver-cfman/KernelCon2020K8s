@@ -19,7 +19,7 @@ Note: Yes, that's a "'read-only'" user token (we will talk about this later)
 about.html      build_e2.yml    dsvw.py     index.html
 ```
 - This is your "development" directory....yeah, you know,...it's where you keep your code ; Now you can make use of [Docker Compose](https://docs.docker.com/compose/compose-file/) to "spin up" your development environment.
-- run the docker-compose command with the definition file.
+- Run the docker-compose command with the definition file.
 ```
 docker-compose -f build_e2.yml up -d
 ```
