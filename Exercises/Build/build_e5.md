@@ -30,7 +30,7 @@ CMD ["/bin/echo","Hello, KernelCon 2020!"]
 # docker run --rm hello-kernelcon
 ```
 ## What the heck just happened?
-## Well, we instructed docker to "pull down" the "__latest__" image of __ubuntu__ (as a tar ball) and use it as the *base* of our new image, then we just used an existing binary which was already present in the image __echo__ (in this case), to display a message.
+## Well, we instructed docker to "pull down" the "__latest__" image of __ubuntu__ (as a tar ball) and use it as the *base* of our new image, then we just used an existing binary which was already present in the image "__echo__" (in this case), to display a message.
 
 ## As we __ADD__ or __COPY__ content into our containers, they are stored as additional *layers* in the *overlay* filesystem that makes up each __image__, and they become available to any process running within that container.   Let's do a very simple example:
 - Edit your __Dockerfile__ again to look like this:
@@ -70,7 +70,7 @@ df31d827354d        2 seconds ago       /bin/sh -c #(nop) COPY file:e211b2a00deb
 
 # Storage
 
-## Now, that's all well and good, but these __images__ are not worth much if we can't share them between systems or with each other. Enter "the registry". Most people start with "official" images stored within the DTR (Docker Trusted Registry), or Docker Hub. However, there is nothing stopping you from using __docker save__ on one system, then __docker load__, on another. In fact, this is exactly how many "air-gapped" systems need to work. But, in most cases, developers set up their own registry to store their images. A few of note are:
+## Now, that's all well and good, but these __images__ are not worth much if we can't share them between systems or with each other. Enter "the registry". Most people start with "official" images stored within the DTR (Docker Trusted Registry), or Docker Hub. However, there is nothing stopping you from using ___docker save___ on one system, then ___docker load___, on another. In fact, this is exactly how many "air-gapped" systems need to work. But, in most cases, developers set up their own registry to store their images. A few of note are:
 - [Docker Hub]()
 - [GitLab Container Registry]()
 - [Docker Registry](https://hub.docker.com/_/registry)
@@ -106,7 +106,7 @@ docker run -d -p 5000:5000 --restart=always --name registry registry:2
 
 # Scanning
 
-## As you have seen, "Images" are the base for all content used during execution of a container, and are essential to container use. As you may already guess, trusting the content of this image is essential to creating a secure environment. Therefore, we must constantly update and periodically  __scan__ the content of these __images__ to ensure they are both safe and usable.  Some registries will automatically do this. _Nexus_, _JFrog_, and _Docker Hub_ do this with automated bots that scan images already stored in their registries. CI/CD systems can be made to review the results of these scanning tools' outputs and stop builds on "bad" scores. Or, you can review your output manualy, or "script up" a tool of your own.
+## As you have seen, "Images" are the base for all content used during execution of a container, and are essential to container use. As you may already guess, trusting the content of this image is essential to creating a secure environment. Therefore, we must constantly update and periodically  __scan__ the content of these __images__ to ensure they are both safe and usable.  Some registries will automatically do this. ___Nexus___, ___JFrog___, and ___Docker Hub___ do this with automated bots that scan images already stored in their registries. CI/CD systems can be made to review the results of these scanning tools' outputs and stop builds on "bad" scores. Or, you can review your output manualy, or "script up" a tool of your own.
 
 ### Manual scan walkthrough. Let's take our example image we just created; All we did was add a test file to the image...it should be safe, right? We didn't ADD any scary new "Zero-Day" malware into the image, so, we should be able to use it, right? Let's see.
 
