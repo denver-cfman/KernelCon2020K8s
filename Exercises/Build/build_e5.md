@@ -76,7 +76,7 @@ df31d827354d        2 seconds ago       /bin/sh -c #(nop) COPY file:e211b2a00deb
 - [Docker Registry](https://hub.docker.com/_/registry)
 - [JFrogs Container Registry](https://jfrog.com/container-registry/)
 - [Sonatype Nexus Repository Manager (OSS)](https://www.sonatype.com/nexus-repository-oss)
-- and many many more  ...
+- and many, many, more...
 
 ## Let's set up our own registry
 - Run the docker command to "pull down", "start", and "host" a local registry.
@@ -106,7 +106,7 @@ docker run -d -p 5000:5000 --restart=always --name registry registry:2
 
 # Scanning
 
-## As you have seen, "Images" are the base for all content used during execution of a container, and are essential to container use. As you may already guess, trusting the content of this image is essential to creating a secure environment. Therefore, we must constantly update and periodically  __scan__ the content of these __images__ to ensure they are both safe and usable.  Some registries will automatically do this. ___Nexus___, ___JFrog___, and ___Docker Hub___ do this with automated bots that scan images already stored in their registries. CI/CD systems can be made to review the results of these scanning tools' outputs and stop builds on "bad" scores. Or, you can review your output manualy, or "script up" a tool of your own.
+## As you have seen, "images" are the base for all content used during execution of a container, and are essential to container use. As you may already guess, trusting the content of this image is essential to creating a secure environment. Therefore, we must constantly update, and periodically  __scan__, the content of these __images__ to ensure they are both safe and usable.  Some registries will automatically do this. ___Nexus___, ___JFrog___, and ___Docker Hub___ do this with automated bots that scan images already stored in their registries. CI/CD systems can be made to review the results of these scanning tools' outputs and stop builds on "bad" scores. Or, you can review your output manualy, or "script up" a tool of your own.
 
 ### Manual scan walkthrough. Let's take our example image we just created; All we did was add a test file to the image...it should be safe, right? We didn't ADD any scary new "Zero-Day" malware into the image, so, we should be able to use it, right? Let's see.
 
