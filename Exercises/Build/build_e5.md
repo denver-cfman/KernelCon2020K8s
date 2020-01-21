@@ -72,7 +72,7 @@ df31d827354d        2 seconds ago       /bin/sh -c #(nop) COPY file:e211b2a00deb
 
 # Storage
 
-#### Now, that's all well and good, but these __images__ are not worth much if we can't share them between systems, or with each other. Enter ___"The Registry"___. 
+#### Now, having an __image__ is "all well and good", but these __images__ are not worth much if we can't share them between systems, or with each other. Enter ___"The Registry"___.  A "registry" is where images are stored for shared use.  Developers can go to "official" registries or create their own registry.
 
 #### Most people start with "official" images stored within the DTR (Docker Trusted Registry), or Docker Hub. However, there is nothing stopping you from using ___docker save___ on one system, then ___docker load___, on another. In fact, this is exactly how many "air-gapped" systems need to work. But, in most cases, developers set up their own registry to store their images. A few of note are:
 - [Docker Hub]()
