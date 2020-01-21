@@ -9,7 +9,7 @@
 
 #### Docker makes this easy with a scripted interface called "[Dockerfile](https://docs.docker.com/engine/reference/builder/)". Basically, the docker client will "read in" each line of this script, and interpret it into specific actions needed to create or refine a specific image.
 
-## Let's make an image
+## Let's make an image:
 
 - Make a new folder and create a new "Dockerfile"
 ```
@@ -30,9 +30,11 @@ CMD ["/bin/echo","Hello, KernelCon 2020!"]
 # docker run --rm hello-kernelcon
 ```
 #### What the heck just happened?
+
 #### Well, we instructed docker to "pull down" the "__latest__" image of __ubuntu__ (as a tar ball) and use it as the *base* of our new image, then we just used an existing binary which was already present in the image "__echo__" (in this case), to display a message.
 
 #### As we __ADD__ or __COPY__ content into our containers, they are stored as additional *layers* in the *overlay* filesystem that makes up each __image__, and they become available to any process running within that container.   Let's do a very simple example:
+
 - Edit your __Dockerfile__ again to look like this:
 ```
 FROM ubuntu:16.04
@@ -48,7 +50,7 @@ CMD ["/bin/echo","Hello, KernelCon 2020!"]
 ```
 docker build --tag hello-kernelcon .
 ```
-### This time, let's take a look at the __history__ of the image:
+## This time, let's take a look at the __history__ of the image:
 ```
 # docker history hello-kernelcon
 
@@ -78,7 +80,7 @@ df31d827354d        2 seconds ago       /bin/sh -c #(nop) COPY file:e211b2a00deb
 - [Sonatype Nexus Repository Manager (OSS)](https://www.sonatype.com/nexus-repository-oss)
 - and many, many, more...
 
-## Let's set up our own registry
+## Let's set up our own registry:
 - Run the docker command to "pull down", "start", and "host" a local registry.
 ```
 docker run -d -p 5000:5000 --restart=always --name registry registry:2
@@ -108,7 +110,8 @@ docker run -d -p 5000:5000 --restart=always --name registry registry:2
 
 #### As you have seen, "images" are the base for all content used during execution of a container, and are essential to container use. As you may already guess, trusting the content of this image is essential to creating a secure environment. Therefore, we must constantly update, and periodically  __scan__, the content of these __images__ to ensure they are both safe and usable.  Some registries will automatically do this. ___Nexus___, ___JFrog___, and ___Docker Hub___ do this with automated bots that scan images already stored in their registries. CI/CD systems can be made to review the results of these scanning tools' outputs and stop builds on "bad" scores. Or, you can review your output manualy, or "script up" a tool of your own.
 
-### Manual scan walkthrough. 
+### Manual scan walkthrough.
+
 #### Let's take our example image we just created; All we did was add a test file to the image...it should be safe, right? We didn't ADD any scary new "Zero-Day" malware into the image, so, we should be able to use it, right? Let's see.
 
 - For this exercise you may want to have __jq__ installed.
@@ -144,6 +147,7 @@ cat hello-kernelcon.json |jq '.resources[].vulnerabilities[] | [.name,.descripti
 ```
 
 #### Wait!...What?...All we did was add a text file!... Why are there so many vulnerabilities?
+
 #### When we built our image, we made use of a large "distro" base __ubuntu__. You will see in our next exercise, techniques used to reduce, or in some cases completely remove, additional un-needed files that clutter up our deployable images.
 
 # Review:
