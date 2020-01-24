@@ -2,7 +2,7 @@
 
 ## Taking advantage of devlopers' misconfigurations.
 
-### Preface: "I get it!" Developers have it hard, they are expected to very rapidly and correctly churn out business requirements "AS CODE". Sometimes, this can lead to shortcuts or just plane old "copied" sample as code just to meat a need.
+### Preface: "I get it!" Developers have it hard, they are expected to very rapidly and correctly churn out business requirements "AS CODE". Sometimes, this can lead to shortcuts or just a "plain old copied sample" as code just to meet a need.
 ![Oreilly Funny](Files/images/oreilly_funny.jpg)
 Let's look at the same exercise again from the perspective of the attacker.
 
