@@ -1,8 +1,8 @@
-# Manageing attack surface
+# Managing the attack surface
 
 ## Preface: As you can imagine, the simplest way to reduce the attack surface of a running container is to remove un-needed binary files stored inside the container image. There are two ways to acomplish this.
 ## Post Build: 
-### Say you have an image that you make use of, __node__ in this exsample; you need it to run your node.js app you've built but you don't really need all that extra stuff how would you go through and remove all the un-needed files? You could write a huge __Dockefile__ that deletes known files that you "know" you don't need OR you could exersice the container image during a QA process and "mark" all files not touched or executed durring the lifespan of your regression test. Someone else thought that was a great idea too so they started an opensource project called [docker-slim](https://github.com/docker-slim/docker-slim) Let's build a new docker image and reduce it's attack service by using this reduction process.
+### Say you have an image that you make use of, __node__ in this example; You need it to run your node.js app that you've built but you don't really need all that extra stuff. How would you go through and remove all the un-needed files? You could write a huge __Dockefile__ that deletes known files that you "know" you don't need, OR you could exercise the container image during a QA process and "mark" all files not touched or executed during the lifespan of your regression test. Someone else thought that was a great idea too, so they started an opensource project called [docker-slim](https://github.com/docker-slim/docker-slim) Let's build a new docker image and reduce it's attack service by using this reduction process.
 - Download and set up [Dive](https://github.com/wagoodman/dive) so we can review our results.
     - Download
     ```
@@ -23,13 +23,13 @@
     # cp dist_linux/* /usr/local/bin/
     rm -Rfv dist_linux
     ```
-- Review the prepaired Dockerfile and ajacent files use to deploy this node.js app. (you are welcome to change this as you feel necessary it was preped only to make this exercise quicker)
+- Review the prepaired Dockerfile and adjacent files use to deploy this node.js app. (You are welcome to change this as you feel necessary as it was prepped only to make this exercise quicker)
 ```
 # cd Exercises/Defend/Files/defend_e6_node
 # ls -laSh
 Dockerfile  package.json  server.js
 ```
-- do a docker build
+- Do a docker build
 ```
 # docker build -t localhost:5000/kernelcon-node:v0.0.1 .
 ```
@@ -46,18 +46,18 @@ Dockerfile  package.json  server.js
 ```
 # dive localhost:5000/kernelcon-node:v0.0.1
 ```
-### Wow that image is huge
+### Wow! That image is huge
 ```
 # docker images localhost:5000/kernelcon-node:v0.0.1
 REPOSITORY                      TAG                 IMAGE ID            CREATED             SIZE
 localhost:5000/kernelcon-node   v0.0.1              c387e5ac5905        2 hours ago         911MB
 ```
-### almost one Gig of extra "stuff", lets see just home much is really needed to run this container image.
-- Within the same dir as the exsisting "Dockerfile", run docker-slim
+### Almost one Gig of extra "stuff". Lets see just how much is really needed to run this container image.
+- Within the same dir as the existing "Dockerfile", run docker-slim
 ```
 # docker-slim build --http-probe localhost:5000/kernelcon-node:v0.0.1
 ```
-### This will spin-up your container use a built in http probe to spider your "web app" and monitor all files used, creating a whitelist AND blacklist used to re-build your container image with far less content.
+### This will spin-up your container use a built-in http probe to spider your "web app" and monitor all files used, creating a whitelist AND blacklist used to re-build your container image with far less content.
 - look at the size diference (due to a bug, the new image name will be based on the first word in the image path)
 ```
 # docker images |grep -i slim
@@ -69,15 +69,15 @@ docker-slim-empty-image                                  latest              4bc
 # docker run -d --rm -p 8888:8080 --name node localhost.slim
 # docker stop node
 ```
-- now lets review the image itself with __dive__ (Cntl+C to exit)
+- Now lets review the image itself with __dive__ (Cntl+C to exit)
 ```
 # dive localhost.slim
 ```
-## Wow 47mb, that is a signifagent reduction of attack surface!
-### Granted this will never totaly elimanate attack surface but it does go a log way towards that end.
+## Wow 47mb! That is a significant reduction of attack surface!
+### Granted, this will never totaly eliminate all attack surfaces but it does go a log way towards that end.
 
-## Durring build: 
-### Another method to reduce the amount of attack surface is to "not add" additional file in the first place. This process is much easier for compiled content then is for intrupreted programming languages, but is still possable as you saw in the other method.
+## During the build: 
+### Another method to reduce the amount of attack surface is to "not add" additional file in the first place. This process is much easier for compiled content than it is for interpreted programming languages, but is still possible as you saw in the other method.
 
 ### Lets try and build a golang app "without" adding any extra un-needed files.
 
@@ -99,7 +99,7 @@ COPY *.go .
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o kernelcon .
 
 ```
-### This is our "first stage" of our build process. Yes from Docker version 17.05 you can now have multiple "stages" in the same file. Before this you would have had to do multiple Dockerfiles and chain them togeather. i.e. FROM base:image in Dockerfile-build1 then FROM tag:from_other_Dockerfile in Dockerfile-build2 etc. In any case, we have setup our build container, copy in our golang files and compile it into a single executable.
+### This is our "first stage" of our build process. Yes, from Docker version 17.05 you can now have multiple "stages" in the same file. Before this version, you would have had to create multiple Dockerfiles and chain them together. i.e. FROM base:image in Dockerfile-build1 then FROM tag:from_other_Dockerfile in Dockerfile-build2 etc. In any case, we have set up our build container, copy in our golang files and compile it into a single executable.
 
 ### Now for stage two.
 - Add the second stage to your Dockerfile
@@ -132,7 +132,7 @@ CMD ["./kernelcon"]
 ```
 # dive kernelcon-go
 ```
-### Wow our entire app deployed into <10mb. There is nothing else in that container!. Small to store, small to update, small to upload and download into  a registry. 
+### Wow! Our entire app deployed into <10mb. There is nothing else in that container! Small to store, small to update, small to upload, and small to download into a registry. 
 - Give it a test drive
 ```
 # docker run --rm -d -p 8888:8000 --name kernelcon-go kernelcon-go:latest
@@ -140,7 +140,7 @@ CMD ["./kernelcon"]
 - Feel free to run our __aquasec Microscanner__ on it as well, (you won't find any vulnrabilitys)
 
 ## Review:
-### We built apps using diferent programming languages, deployed them into container images. We valadated image sizes both pre-reduction and post-reduction of container blote. We also made use of multi-stage docker builds to compile our app "outside" the runtime container image. Reduceing the attack surface drasticly.
+### We built apps using different programming languages, deployed them into container images. We validated image sizes both pre-reduction and post-reduction of container bloat. We also made use of multi-stage docker builds to compile our app "outside" the runtime container image, and, overall, reducing the attack surface drastically.
 
 ## Clean up:
 ```
