@@ -64,7 +64,7 @@ Try using your web browser, explore, play around with your new service!
 ```bash
 $ docker stop httpbin
 ```
-this will free up docker resources, so you can move on to other exercises.
+This will free up docker resources, so you can move on to other exercises.
 
 ## Congratulations, you have completed your first exercise "Our First Workload"
 
