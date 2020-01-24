@@ -1,7 +1,7 @@
 # Managing the attack surface
 
 ## Preface: As you can imagine, the simplest way to reduce the attack surface of a running container is to remove un-needed binary files stored inside the container image. There are two ways to acomplish this.
-## Post Build: 
+## Method 1 - Post Build: 
 ### Say you have an image that you make use of, __node__ in this example; You need it to run your node.js app that you've built but you don't really need all that extra stuff. How would you go through and remove all the un-needed files? You could write a huge __Dockefile__ that deletes known files that you "know" you don't need, OR you could exercise the container image during a QA process and "mark" all files not touched or executed during the lifespan of your regression test. Someone else thought that was a great idea too, so they started an opensource project called [docker-slim](https://github.com/docker-slim/docker-slim) Let's build a new docker image and reduce it's attack service by using this reduction process.
 - Download and set up [Dive](https://github.com/wagoodman/dive) so we can review our results.
     - Download
@@ -76,7 +76,7 @@ docker-slim-empty-image                                  latest              4bc
 ## Wow 47mb! That is a significant reduction of attack surface!
 ### Granted, this will never totaly eliminate all attack surfaces but it does go a log way towards that end.
 
-## During the build: 
+## Method 2 - During the build: 
 ### Another method to reduce the amount of attack surface is to "not add" additional file in the first place. This process is much easier for compiled content than it is for interpreted programming languages, but is still possible as you saw in the other method.
 
 ### Lets try and build a golang app "without" adding any extra un-needed files.
