@@ -1,6 +1,6 @@
 # Exercise #4
 
-## Defending your developer against your (~developer~ atacker).
+## Defending your developer against your atacker.
 
 ### Preface: 
 
@@ -45,21 +45,21 @@ services:
 ```
 docker-compose -f defend_e4.yml up -d
 ```
-This will start up a docker container with our app running inside it, now go navagate your web browser to view it.
+This will start up a docker container with our app running inside it. Now navigate your web browser to view it.
 You can do this in many ways, but two come to mind. Use either your "host" browser or make use of the firefox browser within kali linux.
 
-TO use your host browser, you will need to find your kali linux IP with a command comething like this:
+To use your host browser, you will need to find your kali linux IP with a command something like this:
 ![ifconfig eth0](Files/images/kali_ifconfig.jpg)
 or just find it via the ```ifconfig eth0``` command.
 Or again make use of the firefox browser within kali linux:
 ![kali firefox](Files/images/kali_firefox.jpg)
 
-Then navaget to your new dev site: ```http://127.0.0.1:1234```
+Then navigate to your new dev site: ```http://127.0.0.1:1234```
 ![kali firefox](Files/images/kali_e2_site.jpg)
 
 Or use your Host browser if you want ```http://<kali ip>:1234/```
 
-## Go ahead; try that same exploite:
+## Go ahead; try that same exploit:
 ```
 http://<your IP>:1234/?domain=kernelcon.org%3B%20echo%20%22(%E2%95%AF%C2%B0%E2%96%A1%C2%B0)%E2%95%AF%EF%B8%B5%20%E2%94%BB%E2%94%81%E2%94%BB%22%20%3E%20app%2Fabout.html
 ```
