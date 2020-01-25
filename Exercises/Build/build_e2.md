@@ -2,8 +2,9 @@
 
 ## Developing code and leveraging docker to do it!
 
-### Preface: Most developers like to be able to write code and rapidly test it, (or "debug" it), in near "real-time". This "write then run, write then run" process may work well on their local system, but things can get complicated when new dependencies get added, or if the developer's system is not the same as "production", or even the same as a "user" environment.     Containers can be used to set up the execution environment as it is perceived by the process. This means that a developer can set up a "development environment" within a "container",  and then use it to "write then run, write then run" very rapidly, and be confident that the very same container, and very same code, will "run" correctly in another environment.
-### In this exercise, you have a small "web app" that you are building for Kernelcon, and you are going to use [Docker Compose](https://docs.docker.com/compose/compose-file/) to start your "dev" environment, so that you can easily do your work. This is a VERY common set up...and WAY more common than you may think!
+#### Preface: Most developers like to be able to write code and rapidly test it, (or "debug" it), in near "real-time". This "write then run, write then run" process may work well on their local system, but things can get complicated when new dependencies get added, or if the developer's system is not the same as "production", or even the same as a "user" environment.     Containers can be used to set up the execution environment as it is perceived by the process. This means that a developer can set up a "development environment" within a "container",  and then use it to "write then run, write then run" very rapidly, and be confident that the very same container, and very same code, will "run" correctly in another environment.
+
+#### In this exercise, you have a small "web app" that you are building for Kernelcon, and you are going to use [Docker Compose](https://docs.docker.com/compose/compose-file/) to start your "dev" environment, so that you can easily do your work. This is a VERY common set up...and WAY more common than you may think!
 
 If you have not already done so, make sure to _login_ to the class docker registry
 ```
@@ -39,16 +40,16 @@ Then navigate to your new "dev" site: ```http://127.0.0.1:1234```
 
 Or, use your Host browser, if you want ```http://<kali ip>:1234/```
 
-## Oops ...
+### Oops ...
 It looks like you (the web developer) forgot to update the site for 2020. Go ahead and edit the file __index.html__ with a program like __mousepad__ or __vi__ (sorry __emacs__ is not installed on kali by default). Then, just refresh your browser.
 ![kali firefox](Files/images/kali_e2_site_edit.jpg)
 
-### See!  You now have a live "dev and run" environment,...this is very convenient for developers.
+#### See!  You now have a live "dev and run" environment,...this is very convenient for developers.
 ![kali firefox](Files/images/kali_e2_site_save.jpg)
 
-## Have a look around your new dev site. There are some handy "clickable" links and utilities which you will use in another exercise.
+#### Have a look around your new dev site. There are some handy "clickable" links and utilities which you will use in another exercise.
 
-## When you are done, just pull down your "dev" environment via the __docker-compose__ command again.
+#### When you are done, just pull down your "dev" environment via the __docker-compose__ command again.
 ```
 docker-compose -f build_e2.yml down
 ```
