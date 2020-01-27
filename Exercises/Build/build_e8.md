@@ -5,12 +5,21 @@
 
 | Tool Name | Purpose | Notes |
 --- | --- | ---
-[`kubectl`](#kubectl) | core client | This is the Kubernetes core client and is used primarly by anyone using or administration a cluster.
-`stern` | log review | In a cluster you may need to review logs "across" multiple running instances of containers, this __third party__ tool make it a little easier. 
+[`kubectl`](#Kubectl) | core client | This is the Kubernetes [core client](https://kubernetes.io/docs/reference/kubectl/overview/) and is used primarly by anyone using or administration a cluster.
+[`stern`](#Stern) | log review | In a cluster you may need to review logs "across" multiple running instances of containers, this [__third party__](https://github.com/wercker/stern) tool make it a little easier. 
+[`helm`](#Helm) | deployment client | 
+[`popeye`](#Popeye) | cluster security | This third party tool is designed to help you review the security posture of your cluster.
 
 
-## kubectl
+## Kubectl
 ### Foo Bar
 
-## stern
+## Stern
 ### FooBar Baz
+
+## Helm
+### Foo
+
+## Popeye
+### Baz
+
