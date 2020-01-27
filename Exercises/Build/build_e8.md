@@ -96,11 +96,41 @@ Address: 10.96.0.1
 ``` 
 ![kui](Files/images/kui1.jpg)
 #### Now all links are "clickable" you can easly move between pods and services, namespaces, logs etc. It sure beats typing commands over and over.
+#### this "clickable" interface can be used via a standard terminal as well, it's just void of fancy backgrounds etc.
 
-
-## Krew
-### Foo
+## Krew:  (Warning! there be dragons ... )
+### This __plug-in__ is a package manager for "other" `kubectl` __plug-ins__, If you do use it; review what you do install and keep it updated frequently like this:
+```bash
+# kubectl krew update
+# kubectl krew upgrade
+```
+> to get a full list of plug-ins just run:
+```bash
+kubectl krew search
+```
+#### Some notable and helpful plug-in's are `access-matrix`, `advise-psp`, `change-ns` (helpful if you dont want to type `-n default` every time), `cssh`,`ctx`,`resource-capacity`,`sniff` (wireshark remote capture, from inside the pod)
+> installing is as easy as:
+```bash
+# kubectl krew install get-all
+```
+> and using it; as easy as this:
+```bash
+# kubectl get-all |grep -i httpbin
+```
 
 ## Popeye
-### Baz
+### [popeye](https://github.com/derailed/popeye) is a great "read-only" tool, used to interragate your cluster. Reporting inconsistancies and potential security issues; it's a good mesure of where you need to start to apply RBAC, pod security policys, network policies and more. 
+```bash
+# POPEYE_REPORT_DIR=$(pwd) popeye --context minikube
+```
+> I would advise you to checkout the Github site and run it perodicly within your cluster as a scheduled task (cron job) to give you a quick view of how well your cluster is hardend. 
 
+# Review: 
+#### One thing to keep in mind is that each of these tools or utilitys make use of your exsisting cluster credentials and access via the `~/.kube/config` Therefore when you insatll them they are installed on your local system. Unless exsplicitly installing "inside" the cluster via a pod, they are all __local__. Pick which ones you like (make sense to you) and contribute feedback to there authers as they all need it!
+
+
+# Clean up: 
+#### There is no cleen up for this exercise.
+
+ 
+[Return to schedule](../../Docs/SCHEDULE.md)
