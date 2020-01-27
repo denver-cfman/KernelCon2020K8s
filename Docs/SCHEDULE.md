@@ -17,7 +17,7 @@
 	* [Exercise_6](../Exercises/Defend/defend_e6.md) - [managing attack surface](../Exercises/Defend/defend_e6.md)
 	* [Exercise_7](../Exercises/Build/build_e7.md) - [k8s infrastructure basics: apiserver, dns, resource types, etc.](../Exercises/Build/build_e7.md)
 	* [Exercise_8](../Exercises/Build/build_e8.md) - [common tools and commands](../Exercises/Build/build_e8.md)
-	* Exercise_9 - common environments and their differences (bare metal, GKE, EKS, AKS)
+	* [Exercise_9](../Exercises/Build/build_e9.md) - [common environments and their differences (bare metal, GKE, EKS, AKS)](../Exercises/Build/build_e9.md)
 	
 * 12pm -> 1pm Lunch
 
