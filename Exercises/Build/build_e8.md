@@ -14,11 +14,62 @@
 
 > There are many many more, and I could go on and on and on, however we cant spend all day installing and tweaking all the little goodies that make life within k8s easier, so we will stick with these ones for now.
 
+<br/>
+<br/>
+<br/>
+<br/>
+
 ## Kubectl
-### Foo Bar
+> Get all nodes
+```bash
+# kubectl get nodes
+```
+> Show me all pods (across all namespaces)
+```bash
+# kubectl get pods -A
+```
+> create resource(s)
+```bash
+# kubectl apply -f ./my-manifest.yaml
+```
+> delete resource(s)
+```bash
+# kubectl delete -f ./my-manifest.yaml
+```
+> port forward to a service (much like `ssh -L 8080:127.0.0.1:80` )
+```bash
+# kubectl -n default port-forward svc/httpbin-svc 8080:80
+```
+> copy a file from my local system into a specific pod
+```bash
+# kubectl -n devtest cp local.txt httpbin-85d57ddd75-h7tt7:/home/user/local.txt
+```
+> copy a file from a specific pod to my local system. (in the current dir)
+```bash
+# kubectl -n devtest cp httpbin-85d57ddd75-h7tt7:/home/user/local.txt .
+```
+> scale up the number of pods in a deployment
+```bash
+# kubectl -n default scale --current-replicas=2 --replicas=3 deployment/httpbin
+```
+> Attach to a givin shell or execute a speciffic process from within a speciffic container. lets assum you have temparaly deployed the test pod __dnsutils__ from the k8s examples like this ``` kubectl apply -f https://k8s.io/examples/admin/dns/dnsutils.yaml ``` and that it deployed correctly. If so, you could execute commands from "inside" like this ...
+```bash
+# kubectl exec -ti dnsutils -- nslookup kubernetes.default
+
+Server:         10.96.0.10
+Address:        10.96.0.10#53
+
+Name:   kubernetes.default.svc.cluster.local
+Address: 10.96.0.1
+```
+
 
 ## Stern
-### FooBar Baz
+### Stern will combine log streams from the kubelet controler (both stdout and stderr) into a single __log stream__ for a givin set of criteria, for exsample.
+> show me all logs for all instances of __httpbin__ service. Stern will automaticly stay attached to this log stream until you __(Ctl+C)__ out of it.
+```bash
+# stern httpbin- --namespace=default
+```
 
 ## Helm
 ### Foo
