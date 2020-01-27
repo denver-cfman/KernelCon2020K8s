@@ -132,6 +132,7 @@ http://127.0.0.1:45091/api/v1/namespaces/kubernetes-dashboard/services/http:kube
 
 # Clean up: 
 ## We will leave the cluster up for the remaining exercises.
+### Note: at any time within an ajacent terminal you can run ```minikube dashboard``` to bring up the Web Gui if you prefer to use it.
 
  
 [Return to schedule](../../Docs/SCHEDULE.md)
