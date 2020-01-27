@@ -15,8 +15,8 @@
 * 10am -> 11am
 	* [Exercise_5](../Exercises/Build/build_e5.md) - [Image packaging, scanning and storage](../Exercises/Build/build_e5.md).
 	* [Exercise_6](../Exercises/Defend/defend_e6.md) - [managing attack surface](../Exercises/Defend/defend_e6.md)
-	* Exercise_7 - k8s infrastructure basics: apiserver, dns, resource types, etc.
-	* Exercise_8 - common tools and commands
+	* [Exercise_7](../Exercises/Build/build_e7.md) - [k8s infrastructure basics: apiserver, dns, resource types, etc.](../Exercises/Build/build_e7.md)
+	* [Exercise_8](../Exercises/Build/build_e8.md) - [common tools and commands](../Exercises/Build/build_e8.md)
 	* Exercise_9 - common environments and their differences (bare metal, GKE, EKS, AKS)
 	
 * 12pm -> 1pm Lunch
