@@ -81,10 +81,22 @@ Address: 10.96.0.1
 > There are many diferent ways to use __stern__ execute `stern -h` to discover more.
 
 ## Helm
-### Foo
+### Often thought of as the equlivent of __apt__ or __yum__ for your kubernetes cluster, [helm](https://helm.sh/docs/intro/quickstart/) is much more then a meare "package manager" exposing capabilitys like pre-deployment, post-deployment, tests and stupid easy rollback, it becomes a defacto task for many cluster admins to just `helm install` or `helm update` within there cluster.
+> For example, you want to install a chat server within your cluster, it could be as easy as:
+```bash
+# helm install stable/rocketchat --set mongodb.mongodbPassword=$(echo -n $(openssl rand -base64 32)),mongodb.mongodbRootPassword=$(echo -n $(openssl rand -base64 32))
+```
+#### obvisly this does not take into account all the "bells and whistles" you may wish to include in such a deployment, but it's never more then a `--set` command option or a browse through the charts `values.yml` file. Giving you compleete control of your masive and complacated deployment.
 
 ## Kui
-### Foo
+### As a plug-in for `kubectl`, `kui` gives you a "clickable" interface into your terminal; you can invoke it via the cli at the time of running commands:
+##### Note: the option `--no-sandbox` is required inside of kali as we are running as root.
+```bash
+# kubectl kui get pods --ui --no-sandbox
+``` 
+![kui](Files/images/kui1.jpg)
+#### Now all links are "clickable" you can easly move between pods and services, namespaces, logs etc. It sure beats typing commands over and over.
+
 
 ## Krew
 ### Foo
