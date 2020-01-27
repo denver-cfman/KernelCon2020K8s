@@ -70,6 +70,15 @@ Address: 10.96.0.1
 ```bash
 # stern httpbin- --namespace=default
 ```
+> using __stern__ like `grep -v`
+```bash
+# stern httpbin- --namespace=default -e DontWant
+```
+> using __stern__ like `grep -i`
+```bash
+# stern httpbin- --namespace=default -i error
+```
+> There are many diferent ways to use __stern__ execute `stern -h` to discover more.
 
 ## Helm
 ### Foo
