@@ -7,7 +7,7 @@
 
 * 9am -> 10am (With 15 min break) (containers)
 	* [Exercise_1](../Exercises/Build/FIRSTWORKLOAD.md) - lets deploy our [first workload](../Exercises/Build/FIRSTWORKLOAD.md)
-	* Discussion - Linux kernel, namespaces, etc.
+	* [Discussion](https://docs.google.com/presentation/d/1W5gmw8x_ERPK_EHPNemk12-F2O05vSGp8yKdtxPJ4Gc/edit?usp=sharing) - [Linux kernel, namespaces, etc.](https://docs.google.com/presentation/d/1W5gmw8x_ERPK_EHPNemk12-F2O05vSGp8yKdtxPJ4Gc/edit?usp=sharing)
 	* [Exercise_2](../Exercises/Build/build_e2.md) - [docker-compose (Builder)](../Exercises/Build/build_e2.md)-  Why is it important to work with containers as opposed to running local?
 	* [Exercise_3](../Exercises/Break/break_e3.md) - [docker-compose (Breaker)](../Exercises/Break/break_e3.md)- Here's what you can do in an improperly configured Dev. Env.
 	* [Exercise_4](../Exercises/Defend/defend_e4.md) - [docker-compose (Defender)](../Exercises/Defend/defend_e4.md) - How to secure your Dev. Environment.
@@ -17,7 +17,7 @@
 	* [Exercise_6](../Exercises/Defend/defend_e6.md) - [managing attack surface](../Exercises/Defend/defend_e6.md)
 	* [Exercise_7](../Exercises/Build/build_e7.md) - [k8s infrastructure basics: apiserver, dns, resource types, etc.](../Exercises/Build/build_e7.md)
 	* [Exercise_8](../Exercises/Build/build_e8.md) - [common tools and commands](../Exercises/Build/build_e8.md)
-	* [Exercise_9](../Exercises/Build/build_e9.md) - [common environments and their differences (bare metal, GKE, EKS, AKS)](../Exercises/Build/build_e9.md)
+	* [Discussion](https://docs.google.com/presentation/d/1TpoivL41TL-6t6rTEUfXONbwdIz8rMVUhJgCtO6qy5c/edit?usp=sharing) - [common environments and their differences (bare metal, GKE, EKS, AKS)](https://docs.google.com/presentation/d/1TpoivL41TL-6t6rTEUfXONbwdIz8rMVUhJgCtO6qy5c/edit?usp=sharing)
 	
 * 12pm -> 1pm Lunch
 
