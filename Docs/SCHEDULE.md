@@ -22,28 +22,28 @@
 * 12pm -> 1pm Lunch
 
 * 1pm -> 2pm
-	* Exercise_10 - Let's deploy our second workload
-	* Exercise_11 - Scaling workloads
-	* Exercise_12 - Cluster key infrastructure
-	* Exercise_13 - Attacking  Cluster key infrastructure
-	* Exercise_14 - Cluster authentication
-	* Exercise_15 - Attacking  Cluster authentication
+	* Exercise_09 - Let's deploy our second workload
+	* Exercise_10 - Scaling workloads
+	* Exercise_11 - Cluster key infrastructure
+	* Exercise_12 - Attacking  Cluster key infrastructure
+	* Exercise_13 - Cluster authentication
+	* Exercise_14 - Attacking  Cluster authentication
 	
 * 2pm -> 3pm
-	* Exercise_16 - Ingress
-	* Exercise_17 - Egress
-	* Exercise_18 - East / West
-	* Exercise_19 - Attacking Cluster networking
-	* Exercise_20 - Defending Cluster networking
+	* Exercise_15 - Ingress
+	* Exercise_16 - Egress
+	* Exercise_17 - East / West
+	* Exercise_18 - Attacking Cluster networking
+	* Exercise_19 - Defending Cluster networking
 	
 * 3pm -> 4pm  (With 15 min break)
-	* Exercise_21 - How do secrets work
+	* Exercise_20 - How do secrets work
 	* Discussion  - Common tools and tech used for secrets.
-	* Exercise_22 - Attacking secret storage
-	* Exercise_23 - Creative secret integration
+	* Exercise_21 - Attacking secret storage
+	* Exercise_22 - Creative secret integration
 	
 * 4pm -> 5pm
-	* Exercise_24 - Kubectl plugins
-	* Exercise_25 - Custom resource definitions
-	* Exercise_26 - Pod Security policies
-        * Exercise_27 - Attacking Pod Security policies
+	* Exercise_23 - Kubectl plugins
+	* Exercise_24 - Custom resource definitions
+	* Exercise_25 - Pod Security policies
+    * Exercise_26 - Attacking Pod Security policies
