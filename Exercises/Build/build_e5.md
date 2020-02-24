@@ -14,11 +14,12 @@
 
 ## Let's make an image:
 
-- Make a new folder and create a new "Dockerfile"
+- Make a new folder and create a new "Dockerfile" (i.e. run this set of commands)
 ```
 # mkdir E5 && cd E5 && touch Dockerfile
 ```
-- Edit the "Dockerfile" so it's contents look like this:
+- Edit the "Dockerfile" (feel free to use vim, joe, nano, Kali's "text editer" whatever you like.), so it's contents look like this:
+
 ```
 FROM ubuntu:16.04
 CMD ["/bin/echo","Hello, KernelCon 2020!"]

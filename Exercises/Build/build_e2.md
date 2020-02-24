@@ -6,12 +6,6 @@
 
 #### In this exercise, you have a small "web app" that you are building for Kernelcon, and you are going to use [Docker Compose](https://docs.docker.com/compose/compose-file/) to start your "dev" environment, so that you can easily do your work. This is a VERY common set up...and WAY more common than you may think!
 
-If you have not already done so, make sure to _login_ to the class docker registry
-```
-# echo "Roxx3znazUWqjL56yoSz" | docker login --username denver.cfman@gmail.com --password-stdin registry.gitlab.com
-```
-Note: Yes, that's a "read-only" user token (we will talk about this later)
-
 #### Here we go ...
 
 - Change directory so you are in the __<REPO_ROOT>/Exercises/Build/Files/build_e2/__ directory.
