@@ -16,7 +16,8 @@ spec:
         app: wordpress
     spec:
       containers:
-      - image: vianasw/dvwps
+      #- image: vianasw/dvwps
+      - image: wordpress:latest
         name: wordpress
         env:
         - name: DB_NAME
