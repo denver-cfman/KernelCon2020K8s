@@ -33,7 +33,7 @@ Then navigate to your new dev site: ```http://127.0.0.1:1234```
 Or use your Host browser if you want ```http://<kali ip>:1234/```
 
 ## Did you find it?
-### Looks like there is a R.C.E. vulnerability in the "Kernelcon check" link. if you were to add a ```;``` followed by additional code; you gain code execution on the webserver. Very Bad! Try it:
+### Looks like there is a R.C.E. (i.e. a "remote code execution") vulnerability in the "Kernelcon check" link. if you were to add a ```;``` followed by additional code; you gain code execution on the webserver. Very Bad! Try it:
 ```
 http://<your IP>:1234/?domain=kernelcon.org%3B%20ls
 ```
