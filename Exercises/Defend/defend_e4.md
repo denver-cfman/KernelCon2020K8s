@@ -1,6 +1,6 @@
 # Exercise #4
 
-## Defending your developer against your atacker.
+## Defending your developer against your attacker.
 
 ### Preface: 
 
@@ -11,7 +11,7 @@
 ```
 about.html      defend_e4.yml    dsvw.py     index.html
 ```
-this is the __same__ code sample as before, just copied here for compleetenes and to keep stuff separate. Anyway ~
+this is the __same__ code sample as before, just copied here for completeness and to keep stuff separate. Anyway ~
 - let us __edit__ that __defend_e4.yml__ file.
 ```
 version: "3.7"
@@ -41,7 +41,7 @@ services:
         - ./:/app:ro
 ```
 
-- run the docker-compose command with our __edited__ defnition file.
+- run the docker-compose command with our __edited__ definition file.
 ```
 docker-compose -f defend_e4.yml up -d
 ```
