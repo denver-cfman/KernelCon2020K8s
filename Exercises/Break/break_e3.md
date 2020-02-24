@@ -33,7 +33,7 @@ Then navigate to your new dev site: ```http://127.0.0.1:1234```
 Or use your Host browser if you want ```http://<kali ip>:1234/```
 
 ## Did you find it?
-### Looks like there is a R.C.E. vulnrability in the "Kernelcon check" link. if you were to add a ```;``` followed by additional code; you gain code execution on the webserver. Very Bad! Try it:
+### Looks like there is a R.C.E. vulnerability in the "Kernelcon check" link. if you were to add a ```;``` followed by additional code; you gain code execution on the webserver. Very Bad! Try it:
 ```
 http://<your IP>:1234/?domain=kernelcon.org%3B%20ls
 ```
@@ -43,7 +43,7 @@ http://<your IP>:1234/?domain=kernelcon.org%3B%20echo%20%22(%E2%95%AF%C2%B0%E2%9
 ```
 now go back and click on that __About us__ link.
 
-## In and of itself, that R.C.E. IS bad, but could be contained within the container. The REAL issue steams from the fact that the developer left "read/write" access to their dev directory. (more on that later).
+## In and of itself, that R.C.E. IS bad, but could be contained within the container. The REAL issue stems from the fact that the developer left "read/write" access to their dev directory. (more on that later).
 
 ## When you are done, just pull down your dev. env. via the __docker-compose__ command again.
 ```
