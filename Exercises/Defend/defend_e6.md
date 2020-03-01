@@ -139,7 +139,7 @@ CMD ["./kernelcon"]
 ```
 # docker run --rm -d -p 8888:8000 --name kernelcon-go kernelcon-go:latest
 ```
-- Feel free to run our __aquasec Microscanner__ on it as well, (you won't find any vulnrabilitys)
+- Feel free to run our __aquasec Microscanner__ on it as well, (you won't find any vulnerabilities)
 
 ## Review:
 ### We built apps using different programming languages, and deployed them into container images. We validated image sizes both pre-reduction, and post-reduction of container bloat. We also made use of multi-stage docker builds to compile our app "outside" the runtime container image, and, overall, reducing the attack surface drastically.
