@@ -78,9 +78,9 @@ docker-slim-empty-image                                  latest              4bc
 ### Granted, this will never totaly eliminate all attack surfaces, but it does go a long way towards that end.
 
 ## Method 2 - During the build: 
-### Another method to reduce the amount of attack surface is to "not add" additional files in the first place. This process is much easier for compiled content than it is for interpreted programming languages, but is still possible, as you saw in the other method.
+#### Another method to reduce the amount of attack surface is to "not add" additional files in the first place. This process is much easier for compiled content than it is for interpreted programming languages, but is still possible, as you saw in the other method.
 
-### Lets try and build a golang app "without" adding any extra un-needed files.
+#### Lets try and build a golang app "without" adding any extra un-needed files.
 
 - Review the prepared golang files and adjacent files use to deploy this golang app. (You are welcome to change this as you feel necessary, as it was prepped only to make this exercise quicker)
 ```
