@@ -100,9 +100,10 @@ COPY *.go .
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o kernelcon .
 
 ```
-### This is our "first stage" of our build process. Yes, from Docker version 17.05 you can now have multiple "stages" in the same file. Before this version, you would have had to create multiple Dockerfiles and chain them together. i.e. FROM base:image in Dockerfile-build1 then FROM tag:from_other_Dockerfile in Dockerfile-build2 etc. In any case, we have set up our build container, copy in our golang files and compile it into a single executable.
+#### This is our "first stage" of our build process. 
+##### Yes, from Docker version 17.05 you can now have multiple "stages" in the same file. Before this version, you would have had to create multiple Dockerfiles and chain them together. i.e. FROM base:image in Dockerfile-build1 then FROM tag:from_other_Dockerfile in Dockerfile-build2 etc. In any case, we have set up our build container, copy in our golang files and compile it into a single executable.
 
-### Now for stage two.
+#### Now for stage two.
 - Add the second stage to your Dockerfile
 ```
 
