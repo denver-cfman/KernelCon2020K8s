@@ -26,7 +26,7 @@ services:
     volumes:
         - ./:/app:rw  <- change to "ro"
 ```
-should look like this
+Should look like this
 ```
 version: "3.7"
 services:
@@ -59,14 +59,14 @@ Then navigate to your new dev site: ```http://127.0.0.1:1234```
 
 Or use your Host browser if you want ```http://<kali ip>:1234/```
 
-## Go ahead; try that same exploit:
+### Go ahead; try that same exploit:
 ```
 http://<your IP>:1234/?domain=kernelcon.org%3B%20echo%20%22(%E2%95%AF%C2%B0%E2%96%A1%C2%B0)%E2%95%AF%EF%B8%B5%20%E2%94%BB%E2%94%81%E2%94%BB%22%20%3E%20app%2Fabout.html
 ```
-## did it work?
-## Try to edit one of the files like __index.html__ to address the incorrect date, see a dev can still use it as a rapid development environment; i.e. edit/run, they just need to add some security related functionality so they don't get powned!
+### Did it work?
+#### Try to edit one of the files like __index.html__ to address the incorrect date. See? A developer can still use it as a rapid development environment; i.e. edit/run...they just need to add some security related functionality so they don't get powned!
 
-## When you are done, just pull down your dev. env. via the __docker-compose__ command again.
+### When you are done, just pull down your dev. env. via the __docker-compose__ command again.
 ```
 docker-compose -f defend_e4.yml down
 ```
