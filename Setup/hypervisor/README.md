@@ -22,6 +22,9 @@ The asumption is that you have a working *64bit* system you can install one of t
 
 # The downloadable OVA file is [Here](https://drive.google.com/file/d/1fqhNfukZyvt3EM8WZgi5YJYjhuuT489e/view?usp=sharing)
 
+## Don't be concerned with a Google Drive Warning reguarding the preview of the .ova file, just download the file.
+![Google Drive Warning](../Files/images/google_drive_download_ova.jpg)
+
 Once you have downloaded your .ova file you will need to import it into Virtualbox.
 - Select the __File__ main menu, then __Import Appliance__ from the menu.
 ![Menu Select](../Files/images/s1.jpg)

@@ -19,5 +19,6 @@ Relevent Area | Status
 git clone git@github.com:denver-cfman/KernelCon2020K8s.git
 cd KernelCon2020K8s
 pip install grip
-grip . --title="KernelCon 2020 Kubernetes Training" -b --quiet
+grip . --clear
+grip . --wide --title="KernelCon 2020 Kubernetes Training" -b --quiet
 ```
