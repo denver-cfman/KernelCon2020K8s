@@ -22,7 +22,7 @@ The asumption is that you have a working *64bit* system you can install one of t
 
 # The downloadable OVA file is [Here](https://drive.google.com/file/d/1fqhNfukZyvt3EM8WZgi5YJYjhuuT489e/view?usp=sharing)
 
-## Don't be concerned with a Google Drive Warning reguarding the preview of the .ova file, just download the file.
+## Don't be concerned with a Google Drive Warning regarding the preview of the .ova file, just download the file.
 ![Google Drive Warning](../Files/images/google_drive_download_ova.jpg)
 
 Once you have downloaded your .ova file you will need to import it into Virtualbox.
@@ -35,4 +35,6 @@ Once you have downloaded your .ova file you will need to import it into Virtualb
 - Please make sure to select __Generate new MAC addresses for all network adapters__ form the __MAC Address Policy:__ option before clicking the __Import__ button.
 ![File Selete](../Files/images/s3.jpg)
 
-## Again this is a *Stock* [Kali Linux](https://www.kali.org/downloads/) image only edited to *add* the needed binaries for this course to make setup faster, you may wish to set it up your self via [this guide](../Setup/BININSTALL.md) insted.
+## Again this is a *Stock* [Kali Linux](https://www.kali.org/downloads/) image only edited to *add* the needed binaries for this course to make setup faster, you may wish to set it up your self via [the Solo guide](../Setup/BININSTALL.md) insted.
+
+## [Back to Documents](../../Docs/SCHEDULE.md)
