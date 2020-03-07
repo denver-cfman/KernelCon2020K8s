@@ -67,7 +67,7 @@ Then open a browser and hit [http://127.0.0.1/](http://127.0.0.1/)
 ![WordPress Hello](../Build/Files/images/wp_loadbalenced.png)
 ### I know a little anti-climatic, can't really see the load split across tow pods.
 
-Lets try again with a different pod.
+Lets try again with a different pod.  (note: this is all one command !)
 ```bash
 cat <<EOF | kubectl apply -f -
 apiVersion: apps/v1
@@ -132,6 +132,24 @@ Or virtually patch the deployment:
 #### Foo
 
 ## Clean up: 
-#### Please 
+#### Lets scale back our wordpress deployment to one instance and remove what we did during this exercise.
+```bash
+# kubectl scale --current-replicas=2 --replicas=2 deployment wordpress
+# kubectl delete svc hw-svc
+# kubectl delete deployment hw-nginx
+```
+your cluster should look something like this:
+```bash
+# kubectl get pods,svc
+NAME                             READY   STATUS    RESTARTS   AGE
+pod/mysql-6c8b769d74-sd5f6       1/1     Running   0          86m
+pod/wordpress-6d949c5b75-6bk2h   1/1     Running   0          86m
+pod/wordpress-6d949c5b75-zk7tm   1/1     Running   0          45m
+
+NAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+service/kubernetes   ClusterIP   10.96.0.1      <none>        443/TCP    109m
+service/mysql-svc    ClusterIP   10.96.17.119   <none>        3306/TCP   85m
+service/wp-svc       ClusterIP   10.96.91.157   <none>        80/TCP     35m
+```
  
 [Return to schedule](../../Docs/SCHEDULE.md)
