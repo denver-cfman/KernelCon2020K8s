@@ -32,7 +32,25 @@ NAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE   S
 service/kubernetes   ClusterIP   10.96.0.1      <none>        443/TCP    64m   <none>
 service/mysql-svc    ClusterIP   10.96.17.119   <none>        3306/TCP   41m   app=mysql
 ```
-
+That's great and all, but how do we balance the load across them? Enter the ___"Service"___ object of k8s. it's job is to "load balance" across active pods.
+DNS, activation, service availability, monitoring; all are handled by k8s seamlessly.
+#### Lets create a service for our wordpress site.
+```bash
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Service
+metadata:
+    name: wp-svc
+    labels:
+    app: wordpress
+spec:
+    ports:
+    - port: 80
+    selector:
+    app: wordpress
+    type: ClusterIP
+EOF
+```
 
 ## Review: 
 #### Foo
