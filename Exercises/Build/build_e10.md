@@ -65,7 +65,7 @@ Now you can port-forward to see it in action.
 ```
 Then open a browser and hit [http://127.0.0.1/](http://127.0.0.1/)
 ![WordPress Hello](../Build/Files/images/wp_loadbalenced.png)
-### I know a little anti-climatic, can't really see the load split across tow pods.
+### I know a little anti-climatic, can't really see the load split across two pods.
 
 Lets try again with a different pod.  (note: this is all one command !)
 ```bash
@@ -129,10 +129,10 @@ Or virtually patch the deployment:
 ```
 
 ## Review: 
-#### Foo
+#### You should now be able to scale up or down your ___"deployments"___ to your desire. A clever GrayHat or Attacker might think of ways to ___"Over subscribe"___ or in other ways reduce availability just by over deploying pods and services. (a cluster only has so many resources !)
 
 ## Clean up: 
-#### Lets scale back our wordpress deployment to one instance and remove what we did during this exercise.
+#### Lets scale back our wordpress deployment to one instance and remove what we did during this exercise. (note: we will need the wordpress and mysql pods for later excursuses)
 ```bash
 # kubectl scale --current-replicas=2 --replicas=2 deployment wordpress
 # kubectl delete svc hw-svc
