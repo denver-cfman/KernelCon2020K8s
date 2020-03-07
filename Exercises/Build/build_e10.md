@@ -89,7 +89,7 @@ spec:
         app: hw-nginx
     spec:
       containers:
-      - image: kitematic/hello-world-nginx
+      - image: nginxdemos/hello
         name: hw-nginx
         ports:
         - containerPort: 80
@@ -108,9 +108,24 @@ spec:
       app: hw-nginx
     type: ClusterIP
 EOF
-
-deployment.apps/hw-nginx created
-service/hw-svc created
+```
+you should see three new pods and a new service.
+```bash
+NAME                             READY   STATUS    RESTARTS   AGE
+pod/hw-nginx-7557795b76-267b2    1/1     Running   0          66s
+pod/hw-nginx-7557795b76-7fh6z    1/1     Running   0          66s
+pod/hw-nginx-7557795b76-qwhf9    1/1     Running   0          66s
+NAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+service/hw-svc       ClusterIP   10.96.128.30   <none>        80/TCP     66s
+```
+Try the port-forward   ``` kubectl port-forward svc/hw-svc 80:80 ```
+you can also scale down your deployment.
+```bash
+# kubectl scale --current-replicas=3 --replicas=2 deployment hw-nginx
+```
+Or virtually patch the deployment:
+```bash
+# kubectl patch deployment hw-nginx --type json -p='[{"op": "replace", "path": "/spec/replicas", "value":5}]'
 ```
 
 ## Review: 
