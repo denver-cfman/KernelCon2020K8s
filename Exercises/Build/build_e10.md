@@ -59,7 +59,56 @@ kubernetes   ClusterIP   10.96.0.1      <none>        443/TCP    74m   <none>
 mysql-svc    ClusterIP   10.96.17.119   <none>        3306/TCP   51m   app=mysql
 wp-svc       ClusterIP   10.96.91.157   <none>        80/TCP     73s   app=wordpress
 ```
+Now you can port-forward to see it in action.
+```bash
+# kubectl port-forward svc/wp-svc 80:80
+```
+Then open a browser and hit [http://127.0.0.1/](http://127.0.0.1/)
+![WordPress Hello](../Build/Files/images/wp_loadbalenced.png)
+### I know a little anti-climatic, can't really see the load split across tow pods.
 
+Lets try again with a different pod.
+```bash
+cat <<EOF | kubectl apply -f -
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: hw-nginx
+    labels:
+      app: hw-nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hw-nginx
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: hw-nginx
+    spec:
+      containers:
+      - image: kitematic/hello-world-nginx
+        name: hw-nginx
+        ports:
+        - containerPort: 80
+          name: hw-nginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: hw-svc
+    labels:
+      app: hw-nginx
+spec:
+    ports:
+    - port: 80
+    selector:
+      app: hw-nginx
+    type: ClusterIP
+EOF
+```
 
 ## Review: 
 #### Foo
