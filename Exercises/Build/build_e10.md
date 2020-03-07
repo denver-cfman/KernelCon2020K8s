@@ -15,7 +15,24 @@ NAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
 service/kubernetes   ClusterIP   10.96.0.1      <none>        443/TCP    58m
 service/mysql-svc    ClusterIP   10.96.17.119   <none>        3306/TCP   35m
 ```
-Lets say your workpress site is under more load, now that it's so popular. From a web tier, we can add more php and apache server to handle that load and serve pages faster. (We can discus strategies for Backend database servers later), for now we will focus on the front end. k8s has multiple was of handling this functionality, in fact, because
+Lets say your workpress site is under more load, now that it's so popular. From a web tier, we can add more php and apache server to handle that load and serve pages faster. (We can discus strategies for Backend database servers later), for now we will focus on the front end. k8s has multiple ways of handling this functionality, via the API directly, via yaml file directive or via the fat client affectionately known as ___"kubectl"___ (Cube cuddle). We will try that one first.
+```bash
+# kubectl scale --current-replicas=1 --replicas=2 deployment wordpress
+deployment.apps/wordpress scaled
+``` 
+Wow cool, it just spun up a second instance of wordpress to help balance the load.
+```bash
+# kubectl get pods,svc -o wide
+NAME                             READY   STATUS    RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
+pod/mysql-6c8b769d74-sd5f6       1/1     Running   0          41m   172.17.0.5   minikube   <none>           <none>
+pod/wordpress-6d949c5b75-6bk2h   1/1     Running   0          41m   172.17.0.6   minikube   <none>           <none>
+pod/wordpress-6d949c5b75-zk7tm   1/1     Running   0          72s   172.17.0.7   minikube   <none>           <none>
+
+NAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE   SELECTOR
+service/kubernetes   ClusterIP   10.96.0.1      <none>        443/TCP    64m   <none>
+service/mysql-svc    ClusterIP   10.96.17.119   <none>        3306/TCP   41m   app=mysql
+```
+
 
 ## Review: 
 #### Foo
