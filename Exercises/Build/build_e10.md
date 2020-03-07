@@ -8,36 +8,14 @@
 ```bash
 # kubectl get pods,svc
 NAME                             READY   STATUS    RESTARTS   AGE
-pod/mysql-6c8b769d74-sd5f6       1/1     Running   0          53s
-pod/wordpress-6d949c5b75-6bk2h   1/1     Running   0          45s
+pod/mysql-6c8b769d74-sd5f6       1/1     Running   0          35m
+pod/wordpress-6d949c5b75-6bk2h   1/1     Running   0          35m
 
 NAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
-service/kubernetes   ClusterIP   10.96.0.1      <none>        443/TCP    23m
-service/mysql-svc    ClusterIP   10.96.17.119   <none>        3306/TCP   38s
-service/wp-svc       ClusterIP   10.96.93.54    <none>        80/TCP     38s
+service/kubernetes   ClusterIP   10.96.0.1      <none>        443/TCP    58m
+service/mysql-svc    ClusterIP   10.96.17.119   <none>        3306/TCP   35m
 ```
-Now locate the "build_e10" folder, should be here: ``` KernelCon2020K8s/Exercises/Build/Files/build_e10 ``` and ```cd``` into it. There should be several yaml files ready for you to deploy.
-```bash
-# ls
-fabric8-rbac.yml  spekt8-deployment.yml
-```
-Go ahead and deploy them the same way we did wordpress earlier.
-```bash
-# kubectl apply -f spekt8-deployment.yml
-# kubectl apply -f fabric8-rbac.yml
-```
-Now we should have a few more pods and services in our cluster.
-```bash
-NAME                             READY   STATUS    RESTARTS   AGE
-pod/mysql-6c8b769d74-sd5f6       1/1     Running   0          14m
-pod/spekt8-754758c5fd-tzhhl      1/1     Running   0          7m54s
-pod/wordpress-6d949c5b75-6bk2h   1/1     Running   0          14m
-
-NAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
-service/kubernetes   ClusterIP   10.96.0.1      <none>        443/TCP    37m
-service/mysql-svc    ClusterIP   10.96.17.119   <none>        3306/TCP   13m
-service/wp-svc       ClusterIP   10.96.93.54    <none>        80/TCP     13m
-```
+Lets say your workpress site is under more load, now that it's so popular. From a web tier, we can add more php and apache server to handle that load and serve pages faster. (We can discus strategies for Backend database servers later), for now we will focus on the front end. k8s has multiple was of handling this functionality, in fact, because
 
 ## Review: 
 #### Foo

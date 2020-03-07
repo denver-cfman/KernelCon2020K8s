@@ -11,9 +11,9 @@ apiserver: Running
 kubeconfig: Configured
 ```
 
-The quickest and easiest way is to "create" or "apply" a yaml defanition file via the fat client ```kubectl```.
+The quickest and easiest way is to "create" or "apply" a yaml definition file via the fat client ```kubectl```.
 
-Navagate to the ```Exercises/Build/Files/build_e9``` folder and do an ```ls```, should look somthing like this.
+Navigate to the ```Exercises/Build/Files/build_e9``` folder and do an ```ls```, should look something like this.
 ```bash
 # ls
 01-pvc.yaml
@@ -31,7 +31,7 @@ And
 ```bash
 kubectl create secret generic mysql-root-pass --from-literal=password='password'
 ```
-You can use whatever you like, the text ___password___ is only a sugestion.
+You can use whatever you like, the text ___password___ is only a suggestion.
 
 Now lets deploy them via the ```kubectl``` ___apply___ sub command, like this. (then we will take a look at them)
 ```bash
@@ -41,36 +41,36 @@ kubectl apply -f 03-mysql-deployment.yaml
 kubectl apply -f 04-wordpress-deployment.yaml
 kubectl apply -f 05-service.yaml
 ```
-If it's working, a simplre ``` kubectl get pods ``` should return something like this:
+If it's working, a simpler ``` kubectl get pods ``` should return something like this:
 ```bash
 NAME                         READY   STATUS    RESTARTS   AGE
 mysql-6c8b769d74-m6vbr       1/1     Running   0          11h
 wordpress-665977c8c7-bm6bb   1/1     Running   0          11h
 ```
-If you are not familure with kubernetes, this is two container images, along with their envirnmental configuration; running in two ___pods___ one in each. If you havent guessed yet, this is a wordpress deployment. One ___php webserver___ and the ___mySQL DB Server___ as it's backend.
+If you are not familiar with kubernetes, this is two container images, along with their environmental configuration; running in two ___pods___ one in each. If you haven't guessed yet, this is a wordpress deployment. One ___php web server___ and the ___mySQL DB Server___ as it's backend.
 
 Now lets connect to the Wordpress site: ``` http://127.0.0.1/ ```
 ![Kali Browser](Files/images/kali_browser_fail.png)
-### Just kidding: we need to setup ingress OR forwards network ports before we can access the ___service___ from anything outsite the cluster (more on this later).
+### Just kidding: we need to setup ingress OR forwards network ports before we can access the ___service___ from anything outside the cluster (more on this later).
 Crack open  a terminal and run this command:
 ```bash
-# kubectl port-forward svc/wp-svc 80:80
+# kubectl port-forward deployment/wordpress 80:80
 Forwarding from 127.0.0.1:80 -> 80
 Forwarding from [::1]:80 -> 80
 ```
-Then open a browser window like before and navagate to ___[http://127.0.0.1/](http://127.0.0.1/)___ you should see a wordpress setup page. Please contine with the setup and login to the admin console.
+Then open a browser window like before and navigate to ___[http://127.0.0.1/](http://127.0.0.1/)___ you should see a wordpress setup page. Please continue with the setup and login to the admin console.
 
 ![WP Setup](Files/images/kali_browser_wp_setup.png)
 
-Please make sure to navagate to the ___"Plungins"___ tab and select the ___"Theme My Login"___ plugin and ___"Activate"___ it. (We may need this later ;-) )
+Please make sure to navigate to the ___"Plug-ins"___ tab and select the ___"Theme My Login"___ plugin and ___"Activate"___ it. (We may need this later ;-) )
 
 ![Activate Theme My Login Plugin](Files/images/kali_browser_wp_plugin.png)
 
 
 ## Review: 
-#### Looks Great! We have deployed a two tier WebApp within Kubernetes. This exersize is particurlarly helpfull because it emfasizes just how easy it is to ___"spin up"___ workloads within this orcastration platform. It also aludes to common mistakes developers and first timers fall into when starting down the K8s path. Many asumptions are made, security controles cercomevented and left to the reader to ___"deal with"___ later. 
+#### Looks Great! We have deployed a two tier WebApp within Kubernetes. This exercise is particularly helpful because it emphasizes just how easy it is to ___"spin up"___ workloads within this orchestration platform. It also eludes to common mistakes developers and first timers fall into when starting down the K8s path. Many assumptions are made, security controls circumvented and left to the reader to ___"deal with"___ later. 
 
 ## Clean up: 
-#### Please DO NOT stop any services or tare down any of this exersize, we will use it during our next two segments.
+#### Please DO NOT stop any services or tare down any of this exercise, we will use it during our next two segments.
  
 [Return to schedule](../../Docs/SCHEDULE.md)
