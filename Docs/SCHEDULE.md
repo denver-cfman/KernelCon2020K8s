@@ -22,8 +22,8 @@
 * 12pm -> 1pm Lunch
 
 * 1pm -> 2pm
-	* Exercise_09 - Let's deploy our second workload
-	* Exercise_10 - Scaling workloads
+	* [Exercise_09](../Exercises/Build/build_e9.md) - [Let's deploy our second workload](../Exercises/Build/build_e9.md)
+	* [Exercise_10](../Exercises/Build/build_e10.md) - [Scaling workloads](../Exercises/Build/build_e10.md)
 	* Exercise_11 - Cluster key infrastructure
 	* Exercise_12 - Attacking  Cluster key infrastructure
 	* Exercise_13 - Cluster authentication
