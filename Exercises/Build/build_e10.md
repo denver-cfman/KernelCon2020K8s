@@ -108,6 +108,9 @@ spec:
       app: hw-nginx
     type: ClusterIP
 EOF
+
+deployment.apps/hw-nginx created
+service/hw-svc created
 ```
 
 ## Review: 
