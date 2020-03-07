@@ -42,15 +42,24 @@ kind: Service
 metadata:
     name: wp-svc
     labels:
-    app: wordpress
+      app: wordpress
 spec:
     ports:
     - port: 80
     selector:
-    app: wordpress
+      app: wordpress
     type: ClusterIP
 EOF
 ```
+Then
+```bash
+# kubectl get svc -o wide
+NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE   SELECTOR
+kubernetes   ClusterIP   10.96.0.1      <none>        443/TCP    74m   <none>
+mysql-svc    ClusterIP   10.96.17.119   <none>        3306/TCP   51m   app=mysql
+wp-svc       ClusterIP   10.96.91.157   <none>        80/TCP     73s   app=wordpress
+```
+
 
 ## Review: 
 #### Foo
