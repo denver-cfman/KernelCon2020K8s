@@ -49,8 +49,6 @@ curl -LO https://pkg.cfssl.org/R1.2/cfssl-newkey_linux-amd64
 curl -LO https://pkg.cfssl.org/R1.2/cfssl-scan_linux-amd64
 curl -LO https://pkg.cfssl.org/R1.2/cfssl_linux-amd64
 curl -LO https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64
-curl -LO https://pkg.cfssl.org/R1.2/mkbundle_linux-amd64
-curl -LO https://pkg.cfssl.org/R1.2/multirootca_linux-amd64
 chmod +x cfssl*
 mv cfssl-bundle_linux-amd64 cfssl-bundle
 mv cfssl-certinfo_linux-amd64 cfssl-certinfo
@@ -58,8 +56,6 @@ mv cfssl-newkey_linux-amd64 cfssl-newkey
 mv cfssl-scan_linux-amd64 cfssl-scan
 mv cfssl_linux-amd64 cfssl
 mv cfssljson_linux-amd64 cfssljson
-mv mkbundle_linux-amd64 mkbundle
-mv multirootca_linux-amd64 multirootca
 mv -fv cfssl* /usr/bin/
 ```
 Now you should have ___"cfssl"___ installed on your kali system, please [download](https://pkg.cfssl.org/) other binaries if you are fallowing this via a different system. Next we need to get a listing of our current wordpress pods and services to put into the request.
@@ -116,6 +112,15 @@ Please verify it's been received via the command:
 ```bash
 # kubectl get csr
 ```
+Because you are the admin of your cluster, you are able to approve them:
+```bash
+# kubectl certificate approve wp-svc.default
+```
+Then do another ```kubectl get csr```
+```bash
+# kubectl get csr
+```
+It should say 
 
 ## Review:
 
