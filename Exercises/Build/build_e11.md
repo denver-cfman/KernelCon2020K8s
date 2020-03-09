@@ -58,7 +58,7 @@ mv cfssl_linux-amd64 cfssl
 mv cfssljson_linux-amd64 cfssljson
 mv -fv cfssl* /usr/bin/
 ```
-Now you should have ___"cfssl"___ installed on your kali system, please [download](https://pkg.cfssl.org/) other binaries if you are fallowing this via a different system. Next we need to get a listing of our current wordpress pods and services to put into the request.
+Now you should have ___"cfssl"___ installed on your kali system, please [download](https://pkg.cfssl.org/) other binaries if you are fallowing this via a different system. (macOS users can just run ```brew install cfssl cfssljson```) Next we need to get a listing of our current wordpress pods and services to put into the request.
 ```bash
 # kubectl get pods,svc -o wide
 NAME                             READY   STATUS    RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
@@ -119,8 +119,28 @@ Because you are the admin of your cluster, you are able to approve them:
 Then do another ```kubectl get csr```
 ```bash
 # kubectl get csr
+NAME             AGE   REQUESTOR              CONDITION
+csr-j6sgr        42m   system:node:minikube   Approved,Issued
+wp-svc.default   37s   minikube-user          Approved,Issued
 ```
-It should say 
+It should say Approved now. And you should now be able to download the signed cert and writ it to a file. We can do that via ```kubectl``` and "print out" the certificate status via the jasonpath, like this:
+```bash
+# kubectl get csr wp-svc.default -o jsonpath='{.status.certificate}' \
+    | base64 --decode > server.crt
+```
+You should now have a ___"server.crt"___ file in your local dir, like this. (you can ```cat``` the contents and see a Base64 encoded PEM format cert)
+```bash
+# ls
+server-key.pem	server.crt	server.csr
+# cat server.crt
+-----BEGIN CERTIFICATE-----
+MIIC5TCCAc2gAwIBAgIRAO2QNT1Bu3aLKJmTJEE06tkwDQYJKoZIhvcNAQELBQAw
+FTETMBEGA1UEAxMKbWluaWt1YmVDQTAeFw0yMDAzMDgyMzUxMDJaFw0yMTAzMDgy
+MzUxMDJaMCsxKTAnBgNVBAMTIHdwLXN2Yy5kZWZhdWx0LnBvZC5jbHVzdGVyLmxv
+Y2FsMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEbh0Up4r/IYnIC0tAN+d7nHbr
+......
+```
+
 
 ## Review:
 
