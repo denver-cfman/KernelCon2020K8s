@@ -25,7 +25,7 @@
 	* [Exercise_09](../Exercises/Build/build_e9.md) - [Let's deploy our second workload](../Exercises/Build/build_e9.md)
 	* [Exercise_10](../Exercises/Build/build_e10.md) - [Scaling workloads](../Exercises/Build/build_e10.md)
 	* [Exercise_11](../Exercises/Build/build_e11.md) - [Cluster key infrastructure](../Exercises/Build/build_e11.md)
-	* Exercise_12 - Attacking  Cluster key infrastructure
+	* [Exercise_12](../Exercises/Defend/defend_e12.md) - [PKI, a better way](../Exercises/Defend/defend_e12.md)
 	* Exercise_13 - Cluster authentication
 	* Exercise_14 - Attacking  Cluster authentication
 	

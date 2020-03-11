@@ -140,10 +140,12 @@ MzUxMDJaMCsxKTAnBgNVBAMTIHdwLXN2Yy5kZWZhdWx0LnBvZC5jbHVzdGVyLmxv
 Y2FsMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEbh0Up4r/IYnIC0tAN+d7nHbr
 ......
 ```
-
+With these three files you can setup tls on a service, or more importantly an ingress service! (we will get into ingress soon)
 
 ## Review:
+### As you can see, we can leverage the ___"in built"___ [ca](https://en.wikipedia.org/wiki/Certificate_authority) created within k8s to sign certificates needed for workload traffic. In addition to manually provisioning keys and certs (as well as signing them) there are many Automated projects out in the open source ecosystem. Projects like [cert-manager](https://github.com/jetstack/cert-manager) managed by the JetStack group are excellent "drop in" tools to help manage and automate signing and renewal of expiring certs. 
 
 ## Clean op:
+#### Please keep the wordpress pods and service around, we will use them soon. In addition save the ___"service.crt"___ and ___"server-key.pem"___ files as we will use them later as well.
 
 [Return to schedule](../../Docs/SCHEDULE.md)
