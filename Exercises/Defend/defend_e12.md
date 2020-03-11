@@ -189,7 +189,7 @@ kubectl get issuers -o wide
 NAME           READY   STATUS           AGE
 vault-issuer   True    Vault verified   140m
 ```
-Looks good, now we can actually use it. Lets say we want to create a certificate request for our wordpress site, and store the outcome in a secured object within k8s, we can set this as declarative state in a file.
+Looks good, now we can actually use it. Lets say we want to create a certificate request for our wordpress site, and store the outcome in a secured object within k8s, we can set this as declarative state in a file. (locate the "wp.kernelcon2020k8s.org_cert.yaml" file in your current dir, should be "KernelCon2020K8s/Exercises/Defend/Files/defend_e12" remember)
 ```bash
 cat wp.kernelcon2020k8s.org_cert.yaml
 
@@ -206,8 +206,45 @@ spec:
   dnsNames:
   - wp.kernelcon2020k8s.org
 ```
+See how we are able to define all the relevant attributes for the certificate via yaml. (feel free to edit as you see fit before deploying.)
+Now deploy the "certificate request" just like any other yaml file.
+```bash
+# kubectl apply -f  wp.kernelcon2020k8s.org_cert.yaml
+```
+You can now see the certificate "state" with a command like this:
+```bash
+# kubectl get certs
+NAME                      READY   SECRET                        AGE
+wp-kernelcon2020k8s-org   True    wp-kernelcon2020k8s-org-tls   33h
+```
+And the cert and keys, like this:
+```bash
+# kubectl get secret wp-kernelcon2020k8s-org-tls -o yaml
+
+apiVersion: v1
+data:
+  ca.crt: LS0tLS1CRUdJTi.....0tLS0=
+  tls.crt: LS0tLS1CRUdJT......LS0=
+  tls.key: LS0tLS1C.....===
+kind: Secret
+metadata:
+  annotations:
+    cert-manager.io/alt-names: wp.kernelcon2020k8s.org
+    cert-manager.io/certificate-name: wp-kernelcon2020k8s-org
+    cert-manager.io/common-name: wp.kernelcon2020k8s.org
+    cert-manager.io/ip-sans: ""
+    cert-manager.io/issuer-kind: Issuer
+    cert-manager.io/issuer-name: vault-issuer
+    cert-manager.io/uri-sans: ""
+  name: wp-kernelcon2020k8s-org-tls
+  namespace: default
+type: kubernetes.io/tls
+```
+
 
 
 ## Review:
+Wow! that was a long one, mostly because there was a lot of setup. But no worries we will make use of vault later as well. Having a stable "secrets" backend, as well as an automated process for generating and signing certificates is important in a highly fluid environment. K8s secret storage is "ok" and (we will get into that soon) but a safer option is to store secrets in a location where they can be better encrypted and backed by a crypto device like an HSM.
 
 ## Clean up:
+ None: we will make use of ___"Vault"___ in later exercises.
