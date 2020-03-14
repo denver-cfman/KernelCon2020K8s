@@ -21,7 +21,7 @@ docker-compose -f break_e3.yml up -d
 This will start up a docker container with our app running inside it. Now go navigate your web browser to view it.
 You can do this in many ways, but two come to mind. Use either your "host" browser or make use of the firefox browser within kali linux.
 
-TO use your host browser, you will need to find your kali linux IP with a command something like this:
+To use your host browser, you will need to find your kali linux IP with a command something like this:
 ![ifconfig eth0](Files/images/kali_ifconfig.jpg)
 or just find it via the ```ifconfig eth0``` command.
 Or again make use of the firefox browser within kali linux:
