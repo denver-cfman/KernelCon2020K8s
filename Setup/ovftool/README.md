@@ -1,6 +1,6 @@
 # OVF Tool is owned and Licensed by VMWare.
 
-The binaries are offered here only as a convenance.
+The binaries are offered here only as a convenience.
 
 [Linux Binary](https://drive.google.com/file/d/1iubaBeFJSoNHypdb8A0dTDqN1WMV1-0N/view?usp=sharing)
 
