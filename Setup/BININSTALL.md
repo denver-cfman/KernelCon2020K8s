@@ -128,7 +128,7 @@ Then add the .krew folder to your path
 <br />
 
 ## [k3s](https://k3s.io)
-### Note: Created by __[Rancher](https://rancher.com/)__ this little binary contains kubernetes, a container runtime AND all the fixings. Used to setup a kubernetes cluster with a small foot print it's well suited for low memory systems like egde IOT devices (like the [Raspberry Pi](https://www.raspberrypi.org/products/))
+### Note: Created by __[Rancher](https://rancher.com/)__ this little binary contains kubernetes, a container runtime AND all the fixings. Used to setup a kubernetes cluster with a small foot print it's well suited for low memory systems like edge IOT devices (like the [Raspberry Pi](https://www.raspberrypi.org/products/))
 #### To install, simply run the installer script.  __(as root user)__
 ```
 # curl -sfL https://get.k3s.io | sh -
