@@ -18,7 +18,7 @@
 ```
 # mkdir E5 && cd E5 && touch Dockerfile
 ```
-- Edit the "Dockerfile" (feel free to use vim, joe, nano, Kali's "text editer" whatever you like.), so it's contents look like this:
+- Edit the "Dockerfile" (feel free to use vim, joe, nano, Kali's "text editor" whatever you like.), so it's contents look like this:
 
 ```
 FROM ubuntu:16.04
@@ -114,7 +114,7 @@ docker run -d -p 5000:5000 --restart=always --name registry registry:2
 
 # Scanning
 
-#### As you have seen, "images" are the base for all content used during execution of a container, and are essential to container use. As you may already guess, trusting the content of this image is essential to creating a secure environment. Therefore, we must constantly update, and periodically  __scan__, the content of these __images__ to ensure they are both safe and usable.  Some registries will automatically do this. ___Nexus___, ___JFrog___, and ___Docker Hub___ do this with automated bots that scan images already stored in their registries. CI/CD systems can be made to review the results of these scanning tools' outputs and stop builds on "bad" scores. Or, you can review your output manualy, or "script up" a tool of your own.
+#### As you have seen, "images" are the base for all content used during execution of a container, and are essential to container use. As you may already guess, trusting the content of this image is essential to creating a secure environment. Therefore, we must constantly update, and periodically  __scan__, the content of these __images__ to ensure they are both safe and usable.  Some registries will automatically do this. ___Nexus___, ___JFrog___, and ___Docker Hub___ do this with automated bots that scan images already stored in their registries. CI/CD systems can be made to review the results of these scanning tools' outputs and stop builds on "bad" scores. Or, you can review your output manually, or "script up" a tool of your own.
 
 ### Manual scan walkthrough.
 

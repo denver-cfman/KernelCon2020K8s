@@ -1,0 +1,135 @@
+---
+# Source: dex-k8s-authenticator/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dex-auth-dex-k8s-authenticator
+  labels:
+    app: dex-auth-dex-k8s-authenticator
+    env: prod
+    chart: "dex-k8s-authenticator-1.2.0"
+    release: "dex-auth"
+    heritage: "Helm"
+data:
+  config.yaml: |-
+    listen: http://0.0.0.0:5555
+    web_path_prefix: /
+    debug: false
+    clusters:
+    - client_id: dex-k8s-authenticator
+      client_secret: generatedLongRandomPhrase
+      description: Kubernetes cluster
+      issuer: https://dex.k8s.example.com/
+      k8s_ca_pem: |
+        -----BEGIN CERTIFICATE-----
+        AAAAAAAAAAABBBBBBBBBBCCCCCC
+        -----END CERTIFICATE-----
+      k8s_master_uri: https://api.k8s.example.com
+      name: k8s.example.com
+      redirect_uri: https://login.k8s.example.com/callback/
+      short_description: k8s cluster
+---
+# Source: dex-k8s-authenticator/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: dex-auth-dex-k8s-authenticator
+  labels:
+    app: dex-k8s-authenticator
+    env: prod
+    chart: dex-k8s-authenticator-1.2.0
+    release: dex-auth
+    heritage: Helm
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5555
+    targetPort: http
+    protocol: TCP
+    name: http
+  selector:
+    app: dex-k8s-authenticator
+    release: dex-auth
+---
+# Source: dex-k8s-authenticator/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dex-auth-dex-k8s-authenticator
+  labels:
+    app: dex-k8s-authenticator
+    env: prod
+    chart: dex-k8s-authenticator-1.2.0
+    release: dex-auth
+    heritage: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dex-k8s-authenticator
+      env: prod
+      release: dex-auth
+  template:
+    metadata:
+      labels:
+        app: dex-k8s-authenticator
+        env: prod
+        release: dex-auth
+      annotations:
+        checksum/config: 79cc70c89eac360858e56f34737689e153a8278a2773e916d2b2a36c858efb5b
+    spec:
+      containers:
+      - name: dex-k8s-authenticator
+        image: "mintel/dex-k8s-authenticator:1.2.0"
+        imagePullPolicy: Always
+        args: [ "--config", "config.yaml" ]
+        ports:
+        - name: http
+          containerPort: 5555
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: http
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: http
+        volumeMounts:
+        - name: config
+          subPath: config.yaml
+          mountPath: /app/config.yaml
+        resources:
+          {}
+      volumes:
+      - name: config
+        configMap:
+          name: dex-auth-dex-k8s-authenticator
+---
+# Source: dex-k8s-authenticator/templates/ingress.yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: dex-auth-dex-k8s-authenticator
+  labels:
+    app: dex-k8s-authenticator
+    env: prod
+    chart: dex-k8s-authenticator-1.2.0
+    release: dex-auth
+    heritage: Helm
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+spec:
+  tls:
+  - hosts:
+    - login.k8s.example.com
+    secretName: cert-auth-login
+  rules:
+  - host: login.k8s.example.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: dex-auth-dex-k8s-authenticator
+          servicePort: 5555

@@ -1,7 +1,7 @@
 # Exercise #9
 ## Our Second workload.
 
-### Lets get fimiure with deploying workloads in kubernetes.
+### Lets get familiar with deploying workloads in kubernetes.
 ### Before we get started, make sure minikube is running.
 ```bash
 # minikube status

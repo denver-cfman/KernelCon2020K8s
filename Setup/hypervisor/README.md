@@ -1,6 +1,6 @@
 # Hypervisor setup ...
 
-## This training will make use of a hypervisor to run our LAB envirnment. You may wish to use [VirtualBox](https://www.virtualbox.org/wiki/Downloads) or [VMWare Player](https://www.vmware.com/go/downloadworkstationplayer), however the supplied .ova .ovf file should be compatable with most any hypervisor available for your use.
+## This training will make use of a hypervisor to run our LAB environment. You may wish to use [VirtualBox](https://www.virtualbox.org/wiki/Downloads) or [VMWare Player](https://www.vmware.com/go/downloadworkstationplayer), however the supplied .ova .ovf file should be compatible with most any hypervisor available for your use.
 
 ### The supplied image is a "stock" [Kali Linux](https://www.offensive-security.com/kali-linux-vm-vmware-virtualbox-image-download/) image with the container runtime, minikube and k3s pre-installed for easy startup.
 
@@ -16,7 +16,7 @@
 
 
 
-The asumption is that you have a working *64bit* system you can install one of these hypervisers on (or already have installed). If you wish to install the binaries for this course on your own, please follow [This guide insted](../BININSTALL.md)
+The assumption is that you have a working *64bit* system you can install one of these hypervisors on (or already have installed). If you wish to install the binaries for this course on your own, please follow [This guide instead](../BININSTALL.md)
 
 ## Once you have a running hypervisor (VMWare Player or VirtualBox) please download the class "OVA image" below.
 
@@ -35,6 +35,6 @@ Once you have downloaded your .ova file you will need to import it into Virtualb
 - Please make sure to select __Generate new MAC addresses for all network adapters__ form the __MAC Address Policy:__ option before clicking the __Import__ button.
 ![File Selete](../Files/images/s3.jpg)
 
-## Again this is a *Stock* [Kali Linux](https://www.kali.org/downloads/) image only edited to *add* the needed binaries for this course to make setup faster, you may wish to set it up your self via [the Solo guide](../Setup/BININSTALL.md) insted.
+## Again this is a *Stock* [Kali Linux](https://www.kali.org/downloads/) image only edited to *add* the needed binaries for this course to make setup faster, you may wish to set it up your self via [the Solo guide](../Setup/BININSTALL.md) instead.
 
 ## [Back to Documents](../../Docs/SCHEDULE.md)

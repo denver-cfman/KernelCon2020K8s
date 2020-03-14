@@ -4,7 +4,7 @@
 
 ## Kubernetes: Build, Break, Defend!
 
-Relevent Area | Status
+Relevant Area | Status
 --- | ---
 [Setup](Setup/README.md)                 | [![](https://img.shields.io/badge/Status-InProgress-f39f37)](Setup/README.md)
 [Docs](Docs/README.md)                   | [![](https://img.shields.io/badge/Status-InProgress-f39f37)](Docs/README.md)
