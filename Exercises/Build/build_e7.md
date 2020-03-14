@@ -31,20 +31,20 @@ rm -Rfv /var/lib/kubelet/*
 NAME       STATUS   ROLES    AGE     VERSION
 minikube   Ready    master   8m35s   v1.17.0
 ```
-### Great now we have a working __singe node__ kubernetes cluster running within your __kali linux__ instance.
+### Great! Now we have a working __single node__ kubernetes cluster running within your __kali linux__ instance.
 
 ### Let's explore. Because kubernetes requires authentication we will not be able to just access the api server directly.
 Therefore we will need to either pass our k8s creds into the curl commands OR we can proxy our requests into k8s via __kubectl proxy__
 ```
 # kubectl proxy --port=8080
 ```
-- then we can access the api server via ANY other web tool (browser, curl, wget) etc. Lets make the same type of call as our __kubctl get nodes__ but via curl.
+- Then we can access the api server via ANY other web tool (browser, curl, wget) etc. Let's make the same type of call as our __kubctl get nodes__ but via curl.
 ###### (in a separate terminal)
 ```
 # curl http://localhost:8080/api/v1/nodes |jq '.items[].metadata.name'
 ```
 <b style="color: #FF0000;">(when done close both terminals)</b></br>
-### As you can see all functionality of the tool __kubectl__ can be accessed via the api natively, you just need to know the [api calls](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.10/#-strong-api-overview-strong-), in fact there are calls that you can only access outside of __kubectl__ but in general the "fat client" known as __kubectl__ will make your life easier not only as a developer, or defender but also as an attacker. Therefore red teams and pen-testers should keep arch specific builds of the __kubectl__ binary available during engagements as they can be copied over to comramized containers and use for pivot attacks. (more on that later :-) )
+### As you can see all functionality of the tool __kubectl__ can be accessed via the api natively, you just need to know the [api calls](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.10/#-strong-api-overview-strong-). In fact, there are calls that you can only access outside of __kubectl__ but in general the "fat client" known as __kubectl__ will make your life easier not only as a developer, or as a defender, but also as an attacker. Therefore red teams and pen-testers should keep arch specific builds of the __kubectl__ binary available during engagements as they can be copied over to comramized containers and use for pivot attacks. (more on that later :-) )
 
 ### By default and unless otherwise configured, internal DNS is handled via the __kube-dns__ service it will automatically set-up name resolution for pods, services and other objects created within the cluster. Let's create an example.
 - Run the command below (all one command) to create a __deployment__
