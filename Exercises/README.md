@@ -1,4 +1,4 @@
-# KernelCon 2020 Kubernetes (k8s) Build Break Defend
+# KernelCon 2020 Kubernetes (k8s) Build! Break! Defend!
 
 ## Exercises
 - [Build !](Build/README.md)
