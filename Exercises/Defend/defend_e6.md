@@ -1,8 +1,8 @@
 # Managing the attack surface
 
-#### Preface: As you can imagine, the simplest way to reduce the attack surface of a running container is to remove un-needed binary files stored inside the container image. There are two ways to acomplish this.
+#### Preface: As you can imagine, the simplest way to reduce the attack surface of a running container is to remove un-needed binary files stored inside the container image. There are two ways to accomplish this.
 ## Method 1 - Post Build: 
-#### Say you have an image that you make use of, __node__ in this example; You need it to run your node.js app that you've built but you don't really need all that extra stuff. How would you go through and remove all the un-needed files? You could write a huge __Dockefile__ that deletes known files that you "know" you don't need, OR you could exercise the container image during a QA process and "mark" all files not touched or executed during the lifespan of your regression test. Someone else thought that was a great idea too, so they started an opensource project called [docker-slim](https://github.com/docker-slim/docker-slim). Let's build a new docker image and reduce it's attack service by using this reduction process.
+#### Say you have an image that you make use of, __node__ in this example; You need it to run your node.js app that you've built but you don't really need all that extra stuff. How would you go through and remove all the un-needed files? You could write a huge __Dockefile__ that deletes known files that you "know" you don't need, OR you could exercise the container image during a QA process and "mark" all files not touched or executed during the lifespan of your regression test. Someone else thought that was a great idea too, so they started an open source project called [docker-slim](https://github.com/docker-slim/docker-slim). Let's build a new docker image and reduce it's attack service by using this reduction process.
 - Download and set up [Dive](https://github.com/wagoodman/dive) so we can review our results.
     - Download
     ```
@@ -58,7 +58,7 @@ localhost:5000/kernelcon-node   v0.0.1              c387e5ac5905        2 hours 
 # docker-slim build --http-probe localhost:5000/kernelcon-node:v0.0.1
 ```
 #### This will spin-up your container use a built-in http probe to spider your "web app" and monitor all files used, creating a whitelist AND blacklist used to re-build your container image with far less content.
-- look at the size diference (due to a bug, the new image name will be based on the first word in the image path)
+- look at the size difference (due to a bug, the new image name will be based on the first word in the image path)
 ```
 # docker images |grep -i slim
 localhost.slim                                           latest              eda963988494        2 minutes ago       46.7MB
@@ -74,14 +74,14 @@ docker-slim-empty-image                                  latest              4bc
 # dive localhost.slim
 ```
 #### Wow 47mb! That is a significant reduction of attack surface!
-#### Granted, this will never totaly eliminate all attack surfaces but it does go a log way towards that end.
+#### Granted, this will never totally eliminate all attack surfaces but it does go a log way towards that end.
 
 ## Method 2 - During the build: 
 #### Another method to reduce the amount of attack surface is to "not add" additional file in the first place. This process is much easier for compiled content than it is for interpreted programming languages, but is still possible as you saw in the other method.
 
 #### Lets try and build a golang app "without" adding any extra un-needed files.
 
-- Review the prepaired golang files and ajacent files use to deploy this golang app. (you are welcome to change this as you feel necessary it was preped only to make this exercise quicker)
+- Review the prepared golang files and adjacent files use to deploy this golang app. (you are welcome to change this as you feel necessary it was created only to make this exercise quicker)
 ```
 # cd Exercises/Defend/Files/defend_e6_go
 # ls -laSh
@@ -137,7 +137,7 @@ CMD ["./kernelcon"]
 ```
 # docker run --rm -d -p 8888:8000 --name kernelcon-go kernelcon-go:latest
 ```
-- Feel free to run our __aquasec Microscanner__ on it as well, (you won't find any vulnrabilitys)
+- Feel free to run our __aquasec Microscanner__ on it as well, (you won't find any vulnerabilities)
 
 ## Review:
 #### We built apps using different programming languages, deployed them into container images. We validated image sizes both pre-reduction and post-reduction of container bloat. We also made use of multi-stage docker builds to compile our app "outside" the runtime container image, and, overall, reducing the attack surface drastically.

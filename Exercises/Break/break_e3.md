@@ -1,6 +1,6 @@
 # Exercise #3
 
-## Taking advantage of devlopers' misconfigurations.
+## Taking advantage of developers' misconfigurations.
 
 ### Preface: "I get it!" Developers have it hard, they are expected to very rapidly and correctly churn out business requirements "AS CODE". Sometimes, this can lead to shortcuts or just a "plain old copied sample" as code just to meet a need.
 ![Oreilly Funny](Files/images/oreilly_funny.jpg)
@@ -14,7 +14,7 @@ Let's look at the same exercise again from the perspective of the attacker.
 about.html      break_e3.yml    dsvw.py     index.html
 ```
 This is the __same__ code sample as before, just copied here for completeness and to keep stuff separate. Anyway ~
-- Run the docker-compose command with our defnition file.
+- Run the docker-compose command with our definition file.
 ```
 docker-compose -f break_e3.yml up -d
 ```
@@ -33,7 +33,7 @@ Then navigate to your new dev site: ```http://127.0.0.1:1234```
 Or use your Host browser if you want ```http://<kali ip>:1234/```
 
 ## Did you find it?
-### Looks like there is a R.C.E. (i.e. a "remote code execution") vulnerability in the "Kernelcon check" link. if you were to add a ```;``` followed by additional code; you gain code execution on the webserver. Very Bad! Try it:
+### Looks like there is a R.C.E. (i.e. a "remote code execution") vulnerability in the "Kernelcon check" link. if you were to add a ```;``` followed by additional code; you gain code execution on the web server. Very Bad! Try it:
 ```
 http://<your IP>:1234/?domain=kernelcon.org%3B%20ls
 ```

@@ -248,3 +248,5 @@ Wow! that was a long one, mostly because there was a lot of setup. But no worrie
 
 ## Clean up:
  None: we will make use of ___"Vault"___ in later exercises.
+
+ [Return to schedule](../../Docs/SCHEDULE.md)

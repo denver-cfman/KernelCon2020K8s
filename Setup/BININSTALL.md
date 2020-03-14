@@ -1,4 +1,4 @@
-# If you are using your own copy of Kali Linux, you may wish to install the needed files manualy.
+# If you are using your own copy of Kali Linux, you may wish to install the needed files manually.
 
 ## To do so please use these instructions.
 
@@ -16,7 +16,7 @@
 <br />
 
 ## [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/)
-### Note: This is the "Fat Client" used universaly to easily interact with the kubernetes api server.
+### Note: This is the "Fat Client" used universally to easily interact with the kubernetes api server.
 #### To install simply download the binary and place it in your path.
 ```
 # sudo curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
@@ -30,8 +30,8 @@ Then
 <br />
 
 ## [docker](https://www.docker.com/)
-### Note: This is the most populer container _runtime_, and we will need it to run indavidule container images.
-#### To install simply run these commands to add the docker repo to your apt sources, ensure you dont have an exsisting copy of docker installed; then install the docker-ce version via the apt-get command.
+### Note: This is the most popular container _runtime_, and we will need it to run individual container images.
+#### To install simply run these commands to add the docker repo to your apt sources, ensure you don't have an existing copy of docker installed; then install the docker-ce version via the apt-get command.
 ```
 # sudo curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
 
@@ -72,7 +72,7 @@ Then test it
 <br />
 
 ## [Minikube](https://minikube.sigs.k8s.io/)
-### Note: minikube is just a fancy script that can _setup_ a single node kubernetes cluster, interact with it and complete some of the more complacated tasks easly.
+### Note: minikube is just a fancy script that can _setup_ a single node kubernetes cluster, interact with it and complete some of the more complicated tasks easily.
 #### To install simply download the binary, add to your path.
 ```
 # sudo curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
@@ -128,8 +128,8 @@ Then add the .krew folder to your path
 <br />
 
 ## [k3s](https://k3s.io)
-### Note: Created by __[Rancher](https://rancher.com/)__ this little binary contains kubernetes, a container runtime AND all the fixings. Used to setup a kubernetes cluster with a small foot print it's well suited for low mwmory systems like egde IOT devices (like the [Raspberry Pi](https://www.raspberrypi.org/products/))
-#### To insatll, simply run the installer script.  __(as root user)__
+### Note: Created by __[Rancher](https://rancher.com/)__ this little binary contains kubernetes, a container runtime AND all the fixings. Used to setup a kubernetes cluster with a small foot print it's well suited for low memory systems like egde IOT devices (like the [Raspberry Pi](https://www.raspberrypi.org/products/))
+#### To install, simply run the installer script.  __(as root user)__
 ```
 # curl -sfL https://get.k3s.io | sh -
 ```
