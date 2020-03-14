@@ -1,1 +1,1 @@
-# File resources, links etc. for first discussion.
+# File resources, links, etc. for first discussion.
