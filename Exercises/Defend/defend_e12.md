@@ -1,10 +1,10 @@
-# Exercise 12 (Theres a better way)
+# Exercise 12 (There's a better way)
 
 ## Note:
-### Altho we will go through a typical setup for demonstration purposes, it is highly recommended to setup [Vault](https://www.vaultproject.io/) with redudency, multiple key custodians and with cert-manager bound to AppRole! (All of which are lengthy and beyond the time alotment for the trining, however I highly encourage you to investagate there extended setups if you wish to build a production setup! You have been warned ...)
+#### Although we will go through a typical setup for demonstration purposes, it is highly recommended to set up [Vault](https://www.vaultproject.io/) with redundancy, multiple key custodians, and with cert-manager bound to AppRole! (All of which are lengthy and beyond the time alotment for the training. However, I highly encourage that you investigate their extended setups if you wish to build a production setup! You have been warned ...:-) )
 
 ## Preface:
-Being able to handle certificate signing all within k8s is great, but there is a better way. One which takes advantage of kubernetes automation, scheduling and declarative configuration nature. I speak of course, of the [cert-manager](https://cert-manager.io/docs/) project. As an extendable framework to handle private key creation, certificate signing requests and the backend Issuer integration; 
+Being able to handle certificate signing all within k8s is great, but there is a better way...the one way which takes advantage of kubernetes automation, scheduling, and declarative configuration nature. I speak of course, of the [cert-manager](https://cert-manager.io/docs/) project, used as an extendable framework to handle private key creation, certificate signing requests, and the backend Issuer integration; 
 
 ## Prep:
 Navigate to the ``` KernelCon2020K8s/Exercises/Defend/Files/defend_e12 ``` folder and do an ```ls``` to ensure you can see / access the correct files for this exercise.
@@ -189,7 +189,7 @@ kubectl get issuers -o wide
 NAME           READY   STATUS           AGE
 vault-issuer   True    Vault verified   140m
 ```
-Looks good, now we can actually use it. Lets say we want to create a certificate request for our wordpress site, and store the outcome in a secured object within k8s, we can set this as declarative state in a file. (locate the "wp.kernelcon2020k8s.org_cert.yaml" file in your current dir, should be "KernelCon2020K8s/Exercises/Defend/Files/defend_e12" remember)
+Looks good. Now we can actually use it. Lets say we want to create a certificate request for our wordpress site, and store the outcome in a secured object within k8s, we can set this as declarative state in a file. (locate the "wp.kernelcon2020k8s.org_cert.yaml" file in your current dir, should be "KernelCon2020K8s/Exercises/Defend/Files/defend_e12" remember)
 ```bash
 cat wp.kernelcon2020k8s.org_cert.yaml
 
@@ -244,7 +244,7 @@ type: kubernetes.io/tls
 
 
 ## Review:
-Wow! that was a long one, mostly because there was a lot of setup. But no worries we will make use of vault later as well. Having a stable "secrets" backend, as well as an automated process for generating and signing certificates is important in a highly fluid environment. K8s secret storage is "ok" and (we will get into that soon) but a safer option is to store secrets in a location where they can be better encrypted and backed by a crypto device like an HSM.
+Wow! That was a long one, mostly because there was a lot of setup. But no worries, we will make use of vault later as well. Having a stable "secrets" backend, as well as an automated process for generating and signing certificates is important in a highly fluid environment. K8s secret storage is "ok" and (we will get into that soon) but a safer option is to store secrets in a location where they can be better encrypted and backed by a crypto device like an HSM.
 
 ## Clean up:
  None: we will make use of ___"Vault"___ in later exercises.
