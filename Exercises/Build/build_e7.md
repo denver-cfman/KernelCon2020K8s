@@ -1,11 +1,11 @@
 # Exercise #7 (k8s infrastructure basics: api-server, dns, resource types, etc.)
 
-## Preface: [Kubernetes](https://kubernetes.io/) is an __Orchestration__ platform. Up till now we have been "spinning up" and "spinning down" containers manually. One at a time we have been isolating individual processes and running them via a container but in an automated environment or production envirement, we need a way to run multipl containers as well as update them; rotate them in and out of deployment; keep track of them etc. etc. This exercise will help you get familure with the core concepts of kubernetes (k8s). 
+### Preface: [Kubernetes](https://kubernetes.io/) is an __Orchestration__ platform. Up till now we have been "spinning up" and "spinning down" containers manually. One at a time we have been isolating individual processes and running them via a container but in an automated environment or production envirement, we need a way to run multipl containers as well as update them; rotate them in and out of deployment; keep track of them etc. etc. This exercise will help you get familiar with the core concepts of kubernetes (k8s). 
 
 ![Kubernetes](Files/images/kubernetes_architecture-768x486.jpg)
 ###### Credit: Ali Gerrard (New Relic)
 
-### At it's heart, K8s has a few services that make up it's core services (Scheduler, Controllers, config storage [etcd] and API server) 
+### At it's heart, K8s has a few services that make up it's core services (Scheduler, Controllers, config storage [etc] and API server) 
 
 ### Lets "start up" our cluster
 - Make sure you have no configuration already.
@@ -44,7 +44,7 @@ Therefore we will need to either pass our k8s creds into the curl commands OR we
 # curl http://localhost:8080/api/v1/nodes |jq '.items[].metadata.name'
 ```
 <b style="color: #FF0000;">(when done close both terminals)</b></br>
-## As you can see all functionality of the tool __kubectl__ can be accessed via the api natively, you just need to know the [api calls](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.10/#-strong-api-overview-strong-), in fact there are calls that you can only access outside of __kubectl__ but in general the "fat client" known as __kubectl__ will make your life easier not only as a developer, or defender but also as an attacker. Therefore red teams and pentesters should keep arch speciffic builds of the __kubectl__ binary available during engagements as they can be copied over to comramized containers and use for pivett attacks. (more on that later :-) )
+## As you can see all functionality of the tool __kubectl__ can be accessed via the api natively, you just need to know the [api calls](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.10/#-strong-api-overview-strong-), in fact there are calls that you can only access outside of __kubectl__ but in general the "fat client" known as __kubectl__ will make your life easier not only as a developer, or defender but also as an attacker. Therefore red teams and pen-testers should keep arch specific builds of the __kubectl__ binary available during engagements as they can be copied over to comramized containers and use for pivot attacks. (more on that later :-) )
 
 ## By default and unless otherwise configured internal DNS is handled via the __kube-dns__ service it will automatically setup name resolution for pods, services and other objects created within the cluster. Lets create an example.
 - Run the command below (all one command) to create a __deployment__
@@ -121,13 +121,13 @@ minikube dashboard
 http://127.0.0.1:45091/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/
 ```
 - then go to the link provided and view your dashboard. You should be able to see our deployment for __httpbin__ and it's service __httpbin-svc__ along with any other workloads in other namespaces etc.
-### click around and have a look at some of the features. You can view, edit, deploy, revert and many other actions within the cluster.
+### click around and have a look at some of the features. You can view, edit, deploy, revert, and many other actions within the cluster.
 ![Kube Dash](Files/images/kube_dash1.jpg)
 
-## Once done, simply Ctr-C out of the terminal running the kube-proxy (minikube dashboard command) this will kill the "port-forward" and tare down your session with the dashboard without leaving it open for attack (more on this later).
+## Once done, simply Ctr-C out of the terminal running the kube-proxy (minikube dashboard command) this will kill the "port-forward" and tear down your session with the dashboard without leaving it open for attack (more on this later).
 
 # Review: 
-## Now we have our single node kubernetes cluster up and running. We deployed a simple service into it and reviewed how to see it, both via the "fat client", "api" and Web Gui Dashboard. In the next exercise we will discuss tools that will make our life easier as an Admin, Developer, Security practitioner and Pentester.
+## Now we have our single node kubernetes cluster up and running. We deployed a simple service into it and reviewed how to see it, both via the "fat client", "api" and Web Gui Dashboard. In the next exercise we will discuss tools that will make our life easier as an Admin, Developer, Security practitioner and Pen-tester.
 
 
 # Clean up: 
