@@ -1,6 +1,6 @@
-# If you are using your own copy of Kali Linux, you may wish to install the needed files manually.
+### If you are using your own copy of Kali Linux, you may wish to install the needed files manually.
 
-## To do so please use these instructions.
+### To do so, please use these instructions.
 
 ### The needed binaries are:
 - kubectl
