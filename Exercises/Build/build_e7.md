@@ -28,8 +28,7 @@ mkdir -p ~/.minikube/addons
 
 ### Then make a new audit policy file
 cat <<EOF > ~/.minikube/addons/audit-policy.yaml
-# Log all requests at the Metadata level.
-apiVersion: audit.k8s.io/v1beta1
+apiVersion: audit.k8s.io/v1
 kind: Policy
 rules:
 - level: Metadata
