@@ -35,6 +35,7 @@ rules:
 EOF
 
 ### Then start up your minikube (with auditing, we will use it later)
+
 CHANGE_MINIKUBE_NONE_USER=true minikube start --vm-driver=none \
     --feature-gates=AdvancedAudit=true \
     --extra-config=apiserver.Audit.LogOptions.Path=/var/log/apiserver/audit.log \
