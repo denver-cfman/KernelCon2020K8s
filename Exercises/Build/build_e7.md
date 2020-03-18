@@ -16,10 +16,31 @@ minikube delete
 rm -Rfv ~/.minikube
 rm -Rfv /etc/kubernetes/*
 rm -Rfv /var/lib/kubelet/*
+
+## or all on one line like this (if you like)
+
+minikube stop && minikube delete && rm -Rfv ~/.kube && rm -Rfv ~/.minikube && rm -Rfv /etc/kubernetes/* && rm -Rfv /var/lib/kubelet/*
 ```
 - Then we start your cluster via __minikube__
 ```
-# CHANGE_MINIKUBE_NONE_USER=true minikube start --vm-driver=none
+### make a path for the audit policy file
+mkdir -p ~/.minikube/addons
+
+### Then make a new audit policy file
+cat <<EOF > ~/.minikube/addons/audit-policy.yaml
+# Log all requests at the Metadata level.
+apiVersion: audit.k8s.io/v1beta1
+kind: Policy
+rules:
+- level: Metadata
+EOF
+
+### Then start up your minikube (with auditing, we will use it later)
+CHANGE_MINIKUBE_NONE_USER=true minikube start --vm-driver=none \
+    --feature-gates=AdvancedAudit=true \
+    --extra-config=apiserver.Audit.LogOptions.Path=/var/log/apiserver/audit.log \
+    --extra-config=apiserver.Audit.PolicyFile=/etc/kubernetes/addons/audit-policy.yaml
+
 
 ⌛  Waiting for cluster to come online ...
 🏄  Done! kubectl is now configured to use "minikube"
@@ -54,15 +75,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: httpbin
+  labels:
+    app: httpbin
 spec:
   selector:
     matchLabels:
-      run: httpbin
+      app: httpbin
   replicas: 2
   template:
     metadata:
       labels:
-        run: httpbin
+        app: httpbin
     spec:
       containers:
       - name: httpbin
