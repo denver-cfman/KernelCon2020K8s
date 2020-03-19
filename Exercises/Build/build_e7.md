@@ -9,7 +9,7 @@
 
 ### Lets "start up" our cluster
 - Make sure you have no configuration already.
-```
+```bash
 rm -Rfv ~/.kube
 minikube stop
 minikube delete
@@ -22,12 +22,17 @@ rm -Rfv /var/lib/kubelet/*
 minikube stop && minikube delete && rm -Rfv ~/.kube && rm -Rfv ~/.minikube && rm -Rfv /etc/kubernetes/* && rm -Rfv /var/lib/kubelet/*
 ```
 - Then we start your cluster via __minikube__
-```
-### make a path for the audit policy file
-mkdir -p ~/.minikube/addons
+```bash
+### start minikube (first time is just to download images etc.)
+CHANGE_MINIKUBE_NONE_USER=true minikube start --vm-driver=none
+
+### now stop minikube
+minikube stop
+
+mkdir -p ~/.minikube/files/etc/ssl/certs
 
 ### Then make a new audit policy file
-cat <<EOF > ~/.minikube/addons/audit-policy.yaml
+cat <<EOF > ~/.minikube/files/etc/ssl/certs/audit-policy.yaml
 apiVersion: audit.k8s.io/v1
 kind: Policy
 rules:
@@ -38,15 +43,15 @@ EOF
 
 CHANGE_MINIKUBE_NONE_USER=true minikube start --vm-driver=none \
     --feature-gates=AdvancedAudit=true \
-    --extra-config=apiserver.Audit.LogOptions.Path=/var/log/apiserver/audit.log \
-    --extra-config=apiserver.Audit.PolicyFile=/etc/kubernetes/addons/audit-policy.yaml
+    --extra-config=apiserver.audit-policy-file=/etc/ssl/certs/audit-policy.yaml \
+    --extra-config=apiserver.audit-log-path=-
 
 
 ⌛  Waiting for cluster to come online ...
 🏄  Done! kubectl is now configured to use "minikube"
 ```
-- Now you can validate that it's working by issuing your first command.
-```
+- Now you can validate that it's working by issuing your first command. (this may take a few min.)
+```bash
 # kubectl get nodes
 
 NAME       STATUS   ROLES    AGE     VERSION
@@ -56,7 +61,7 @@ minikube   Ready    master   8m35s   v1.17.0
 
 ## Lets explore. Because kubernetes requires authentication we will not be able to just access the api server directly.
 Therefore we will need to either pass our k8s creds into the curl commands OR we can proxy our requests into k8s via __kubectl proxy__
-```
+```bash
 # kubectl proxy --port=8080
 ```
 - then we can access the api server via ANY other web tool (browser, curl, wget) etc. Lets make the same type of call as our __kubctl get nodes__ but via curl.
