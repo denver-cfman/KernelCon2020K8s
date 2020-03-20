@@ -42,7 +42,6 @@ EOF
 ### Then start up your minikube (with auditing, we will use it later)
 
 CHANGE_MINIKUBE_NONE_USER=true minikube start --vm-driver=none \
-    --feature-gates=AdvancedAudit=true \
     --extra-config=apiserver.audit-policy-file=/etc/ssl/certs/audit-policy.yaml \
     --extra-config=apiserver.audit-log-path=-
 
@@ -57,6 +56,7 @@ CHANGE_MINIKUBE_NONE_USER=true minikube start --vm-driver=none \
 NAME       STATUS   ROLES    AGE     VERSION
 minikube   Ready    master   8m35s   v1.17.0
 ```
+- make sure to wait until your ___minikube___ node is ___Ready___ before you continue.
 ## Great now we have a working __singe node__ kubernetes cluster running within your __kali linux__ instance.
 
 ## Lets explore. Because kubernetes requires authentication we will not be able to just access the api server directly.
