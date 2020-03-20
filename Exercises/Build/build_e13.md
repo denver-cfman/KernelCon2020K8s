@@ -1,7 +1,9 @@
 # Exercise #13 (Ingress)
 
 ## Preface:
+
 ![kube-proxy](/Docs/Images/k8s_networking_port-forward.png)
+
 Up until now, we have been making use of the k8s ___kube-proxy___ functionality to see our services and pods. In the real world clusters typically expose network ports via something called ___nodePorts___ or ___loadBalancer___
 Lets look at what a node and pod look like without any ___nodePorts___ setup.
 
