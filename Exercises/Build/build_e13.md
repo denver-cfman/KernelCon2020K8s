@@ -242,9 +242,39 @@ NAME            TYPE           CLUSTER-IP    EXTERNAL-IP    PORT(S)             
 nginx-ingress   LoadBalancer   10.96.56.56   192.168.1.45   80:32010/TCP,443:31590/TCP   32m
 ```
 - see that now the ___"EXTERNAL-IP"___ is now a real IP not ___pending___
+- cool lets see if we can hit the site
+
+![Nginx fail](Files/images/kali_e13_nginx_404.png)
+
+### Wait, what?? (Why not it work) ???
+Well there is one more resource we need to deploy to "connect" the external network load balancer and the internal service definition. For this we want to make use of the ___"Ingress"___ resource. It's a manifest where we can define some specific about how we want traffic routed and secured.
+
+- lets build and deploy a "Ingress" manifest to connect them together.
+
+```bash
+
+cat <<EOF | kubectl apply --filename -
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: httpbin-svc-ingress
+spec:
+  rules:
+  - host: 'httpbin.kernelcon2020k8s.org'
+    http:
+      paths:
+      - path: /.*
+        backend:
+          serviceName: httpbin-svc
+          servicePort: 8888
+EOF
+
+### and lets add a host name into our "hosts" file for name resolusion (don't forget to use the same IP you found eariler)
+
+echo "192.168.1.45     httpbin.kernelcon2020k8s.org" >> /etc/hosts
 
 
-
+```
 
 ## Review:
 
