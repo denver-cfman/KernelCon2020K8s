@@ -1,0 +1,652 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: authconfigs.enterprise.gloo.solo.io
+  annotations:
+    "helm.sh/hook": crd-install
+spec:
+  group: enterprise.gloo.solo.io
+  names:
+    kind: AuthConfig
+    listKind: AuthConfigList
+    plural: authconfigs
+    shortNames:
+    - ac
+    singular: authconfig
+  scope: Namespaced
+  version: v1
+  versions:
+  - name: v1
+    served: true
+    storage: true
+---
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: gateways.gateway.solo.io
+  annotations:
+    "helm.sh/hook": crd-install
+spec:
+  group: gateway.solo.io
+  names:
+    kind: Gateway
+    listKind: GatewayList
+    plural: gateways
+    shortNames:
+    - gw
+    singular: gateway
+  scope: Namespaced
+  version: v1
+  versions:
+  - name: v1
+    storage: true
+    served: true
+
+---
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: proxies.gloo.solo.io
+  annotations:
+    "helm.sh/hook": crd-install
+spec:
+  group: gloo.solo.io
+  names:
+    kind: Proxy
+    listKind: ProxyList
+    plural: proxies
+    shortNames:
+    - px
+    singular: proxy
+  scope: Namespaced
+  version: v1
+  versions:
+  - name: v1
+    served: true
+    storage: true
+
+---
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: routetables.gateway.solo.io
+  annotations:
+    "helm.sh/hook": crd-install
+spec:
+  group: gateway.solo.io
+  names:
+    kind: RouteTable
+    listKind: RouteTableList
+    plural: routetables
+    shortNames:
+    - rt
+    singular: routetable
+  scope: Namespaced
+  version: v1
+  versions:
+  - name: v1
+    served: true
+    storage: true
+
+---
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: settings.gloo.solo.io
+  annotations:
+    "helm.sh/hook": crd-install
+  labels:
+    gloo: settings
+spec:
+  group: gloo.solo.io
+  names:
+    kind: Settings
+    listKind: SettingsList
+    plural: settings
+    shortNames:
+    - st
+  scope: Namespaced
+  version: v1
+  versions:
+  - name: v1
+    served: true
+    storage: true
+---
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: upstreams.gloo.solo.io
+  annotations:
+    "helm.sh/hook": crd-install
+spec:
+  group: gloo.solo.io
+  names:
+    kind: Upstream
+    listKind: UpstreamList
+    plural: upstreams
+    shortNames:
+    - us
+    singular: upstream
+  scope: Namespaced
+  version: v1
+  versions:
+  - name: v1
+    served: true
+    storage: true
+
+---
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: upstreamgroups.gloo.solo.io
+  annotations:
+    "helm.sh/hook": crd-install
+spec:
+  group: gloo.solo.io
+  names:
+    kind: UpstreamGroup
+    listKind: UpstreamGroupList
+    plural: upstreamgroups
+    shortNames:
+    - ug
+    singular: upstreamgroup
+  scope: Namespaced
+  version: v1
+  versions:
+  - name: v1
+    served: true
+    storage: true
+
+---
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: virtualservices.gateway.solo.io
+  annotations:
+    "helm.sh/hook": crd-install
+spec:
+  group: gateway.solo.io
+  names:
+    kind: VirtualService
+    listKind: VirtualServiceList
+    plural: virtualservices
+    shortNames:
+    - vs
+    singular: virtualservice
+  scope: Namespaced
+  version: v1
+  versions:
+  - name: v1
+    served: true
+    storage: true
+---
+apiVersion: gateway.solo.io/v1
+kind: Gateway
+metadata:
+  name: gateway-proxy
+  namespace: gloo-system
+  labels:
+    app: gloo
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation
+spec:
+  bindAddress: "::"
+  bindPort: 8080
+  httpGateway: {}
+  useProxyProto: false
+  ssl: false
+  proxyNames:
+  - gateway-proxy
+---
+apiVersion: gateway.solo.io/v1
+kind: Gateway
+metadata:
+  name: gateway-proxy-ssl
+  namespace: gloo-system
+  labels:
+    app: gloo
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation
+spec:
+  bindAddress: "::"
+  bindPort: 8443
+  httpGateway: {}
+  useProxyProto: false
+  ssl: true
+  proxyNames:
+  - gateway-proxy
+---
+apiVersion: gloo.solo.io/v1
+kind: Settings
+metadata:
+  labels:
+    app: gloo
+  name: default
+  namespace: gloo-system
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation
+spec:
+  gloo:
+    xdsBindAddr: "0.0.0.0:9977"
+    invalidConfigPolicy:
+      invalidRouteResponseBody: Gloo Gateway has invalid configuration. Administrators should
+        run `glooctl check` to find and fix config errors.
+      invalidRouteResponseCode: 404
+    disableKubernetesDestinations: false
+  discoveryNamespace: gloo-system
+  kubernetesArtifactSource: {}
+  kubernetesConfigSource: {}
+  kubernetesSecretSource: {}
+  refreshRate: 60s
+  gateway:
+    readGatewaysFromAllNamespaces: false
+    alwaysSortRouteTableRoutes: false
+    validation:
+      proxyValidationServerAddr: gloo:9988
+      alwaysAccept: true
+  discovery:
+    fdsMode: WHITELIST
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: gloo-system
+  labels:
+    app: gloo
+  annotations:
+    "helm.sh/hook": pre-install
+---
+---
+# Source: gloo/templates/12-ingress-proxy-configmap.yaml
+# configmap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ingress-envoy-config
+  namespace: gloo-system
+  labels:
+    app: gloo
+    gloo: ingress-proxy
+data:
+
+  envoy.yaml: |
+    node:
+      cluster: ingress
+      id: "{{.PodName}}.{{.PodNamespace}}"
+      metadata:
+        # role's value is the key for the in-memory xds cache (projects/gloo/pkg/xds/envoy.go)
+        role: "{{.PodNamespace}}~ingress-proxy"
+    static_resources:
+      clusters:
+      - name: xds_cluster
+        connect_timeout: 5.000s
+        load_assignment:
+          cluster_name: xds_cluster
+          endpoints:
+          - lb_endpoints:
+            - endpoint:
+                address:
+                  socket_address:
+                    address: gloo
+                    port_value: 9977
+        http2_protocol_options: {}
+        upstream_connection_options:
+          tcp_keepalive: {}
+        type: STRICT_DNS
+
+    dynamic_resources:
+      ads_config:
+        api_type: GRPC
+        rate_limit_settings: {}
+        grpc_services:
+        - envoy_grpc: {cluster_name: xds_cluster}
+      cds_config:
+        ads: {}
+      lds_config:
+        ads: {}
+    admin:
+      access_log_path: /dev/null
+      address:
+        socket_address:
+          address: 127.0.0.1
+          port_value: 19000 # if .Values.ingressProxy.tracing
+---
+# Source: gloo/templates/2-gloo-usage-configmap.yaml
+# use this config map to record envoy usage stats
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gloo-usage
+  namespace: gloo-system
+  labels:
+    app: gloo
+    gloo: gloo-usage
+data:
+---
+# Source: gloo/templates/2-gloo-service-account.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: gloo
+    gloo: gloo
+  name: gloo
+  namespace: gloo-system
+---
+# Source: gloo/templates/3-discovery-service-account.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: gloo
+    gloo: discovery
+  name: discovery
+  namespace: gloo-system
+---
+# Source: gloo/templates/21-namespace-clusterrole-ingress.yaml
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+    name: gloo-role-ingress
+    labels:
+        app: gloo
+        gloo: rbac
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "secrets", "endpoints", "configmaps"]
+  verbs: ["*"]
+- apiGroups: [""]
+  resources: ["namespaces"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["apiextensions.k8s.io"]
+  resources: ["customresourcedefinitions"]
+  verbs: ["get", "create"]
+- apiGroups: ["gloo.solo.io", "enterprise.gloo.solo.io"]
+  resources: ["settings", "upstreams","upstreamgroups", "proxies","virtualservices", "routetables", "authconfigs"]
+  verbs: ["*"]
+- apiGroups: ["extensions", ""]
+  resources: ["ingresses"]
+  verbs: ["*"]
+---
+# Source: gloo/templates/24-namespace-clusterrolebinding-ingress.yaml
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: gloo-role-binding-ingress-gloo-system
+  labels:
+    app: gloo
+    gloo: rbac
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: gloo-system
+- kind: ServiceAccount
+  name: discovery
+  namespace: gloo-system
+- kind: ServiceAccount
+  name: gloo
+  namespace: gloo-system
+roleRef:
+  kind: ClusterRole
+  name: gloo-role-ingress
+  apiGroup: rbac.authorization.k8s.io
+---
+# Source: gloo/templates/13-ingress-proxy-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: gloo
+    gloo: ingress-proxy
+  name: ingress-proxy
+  namespace: gloo-system
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    name: http
+  - port: 443
+    protocol: TCP
+    name: https
+  selector:
+    gloo: ingress-proxy
+  type: LoadBalancer
+---
+# Source: gloo/templates/2-gloo-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: gloo
+    gloo: gloo
+  name: gloo
+  namespace: gloo-system
+spec:
+  ports:
+  - name: grpc-xds
+    port: 9977
+    protocol: TCP
+  - name: grpc-validation
+    port: 9988
+    protocol: TCP
+  - name: metrics-grpc
+    port: 9966
+    protocol: TCP
+  - name: wasm-cache
+    port: 9979
+    protocol: TCP
+  selector:
+    gloo: gloo
+---
+# Source: gloo/templates/1-gloo-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: gloo
+    gloo: gloo
+  name: gloo
+  namespace: gloo-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      gloo: gloo
+  template:
+    metadata:
+      labels:
+        gloo: gloo
+      annotations:
+        prometheus.io/path: /metrics
+        prometheus.io/port: "9091"
+        prometheus.io/scrape: "true"
+    spec:
+      serviceAccountName: gloo
+      volumes:
+      - name: labels-volume
+        downwardAPI:
+          items:
+            - path: "labels"
+              fieldRef:
+                fieldPath: metadata.labels
+      containers:
+      - image: quay.io/solo-io/gloo:1.2.23
+        imagePullPolicy: IfNotPresent
+        name: gloo
+        resources:
+          requests:
+            cpu: 500m
+            memory: 256Mi
+        securityContext:
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 10101
+          capabilities:
+            drop:
+            - ALL
+        ports:
+        - containerPort: 9977
+          name: grpc-xds
+          protocol: TCP
+        - containerPort: 9988
+          name: grpc-validation
+          protocol: TCP
+        - containerPort: 9979
+          name: wasm-cache
+          protocol: TCP
+        volumeMounts:
+        - name: labels-volume
+          mountPath: /etc/gloo
+          readOnly: true
+        env:
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: START_STATS_SERVER
+            value: "true"
+        readinessProbe:
+          tcpSocket:
+            port: 9977
+          initialDelaySeconds: 1
+          periodSeconds: 2
+          failureThreshold: 10
+---
+# Source: gloo/templates/10-ingress-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: gloo
+    gloo: ingress
+  name: ingress
+  namespace: gloo-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      gloo: ingress
+  template:
+    metadata:
+      labels:
+        gloo: ingress
+    spec:
+      containers:
+      - image: quay.io/solo-io/ingress:1.2.23
+        imagePullPolicy: IfNotPresent
+        name: ingress
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: "KNATIVE_VERSION"
+          value: "0.10.0"
+---
+# Source: gloo/templates/11-ingress-proxy-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: gloo
+    gloo: ingress-proxy
+  name: ingress-proxy
+  namespace: gloo-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      gloo: ingress-proxy
+  template:
+    metadata:
+      labels:
+        gloo: ingress-proxy
+    spec:
+      containers:
+      - args: ["--disable-hot-restart"]
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        image: quay.io/solo-io/gloo-envoy-wrapper:1.2.23
+        imagePullPolicy: IfNotPresent
+        name: ingress-proxy
+        securityContext:
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+            add:
+            - NET_BIND_SERVICE
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        - containerPort: 443
+          name: https
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /etc/envoy
+          name: envoy-config
+      volumes:
+      - configMap:
+          name: ingress-envoy-config
+        name: envoy-config
+---
+# Source: gloo/templates/3-discovery-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: gloo
+    gloo: discovery
+  name: discovery
+  namespace: gloo-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      gloo: discovery
+  template:
+    metadata:
+      labels:
+        gloo: discovery
+      annotations:
+        prometheus.io/path: /metrics
+        prometheus.io/port: "9091"
+        prometheus.io/scrape: "true"
+    spec:
+      serviceAccountName: discovery
+      containers:
+      - image: quay.io/solo-io/discovery:1.2.23
+        imagePullPolicy: IfNotPresent
+        name: discovery
+        securityContext:
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 10101
+          capabilities:
+            drop:
+            - ALL
+        env:
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: START_STATS_SERVER
+            value: "true"
+---
+# Source: gloo/templates/9-gateway-proxy-configmap.yaml
+# if .Values.gateway.enabled
+---

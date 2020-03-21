@@ -9,33 +9,59 @@
 
 ### Lets "start up" our cluster
 - Make sure you have no configuration already.
-```
+```bash
 rm -Rfv ~/.kube
 minikube stop
 minikube delete
 rm -Rfv ~/.minikube
 rm -Rfv /etc/kubernetes/*
 rm -Rfv /var/lib/kubelet/*
+
+## or all on one line like this (if you like)
+
+minikube stop && minikube delete && rm -Rfv ~/.kube && rm -Rfv ~/.minikube && rm -Rfv /etc/kubernetes/* && rm -Rfv /var/lib/kubelet/*
 ```
 - Then we start your cluster via __minikube__
-```
-# CHANGE_MINIKUBE_NONE_USER=true minikube start --vm-driver=none
+```bash
+### start minikube (first time is just to download images etc.)
+CHANGE_MINIKUBE_NONE_USER=true minikube start --vm-driver=none
+
+### now stop minikube
+minikube stop
+
+mkdir -p ~/.minikube/files/etc/ssl/certs
+
+### Then make a new audit policy file
+cat <<EOF > ~/.minikube/files/etc/ssl/certs/audit-policy.yaml
+apiVersion: audit.k8s.io/v1
+kind: Policy
+rules:
+- level: Metadata
+EOF
+
+### Then start up your minikube (with auditing, we will use it later)
+
+CHANGE_MINIKUBE_NONE_USER=true minikube start --vm-driver=none \
+    --extra-config=apiserver.audit-policy-file=/etc/ssl/certs/audit-policy.yaml \
+    --extra-config=apiserver.audit-log-path=-
+
 
 ⌛  Waiting for cluster to come online ...
 🏄  Done! kubectl is now configured to use "minikube"
 ```
-- Now you can validate that it's working by issuing your first command.
-```
+- Now you can validate that it's working by issuing your first command. (this may take a few min.)
+```bash
 # kubectl get nodes
 
 NAME       STATUS   ROLES    AGE     VERSION
 minikube   Ready    master   8m35s   v1.17.0
 ```
+- make sure to wait until your ___minikube___ node is ___Ready___ before you continue.
 ## Great now we have a working __singe node__ kubernetes cluster running within your __kali linux__ instance.
 
 ## Lets explore. Because kubernetes requires authentication we will not be able to just access the api server directly.
 Therefore we will need to either pass our k8s creds into the curl commands OR we can proxy our requests into k8s via __kubectl proxy__
-```
+```bash
 # kubectl proxy --port=8080
 ```
 - then we can access the api server via ANY other web tool (browser, curl, wget) etc. Lets make the same type of call as our __kubctl get nodes__ but via curl.
@@ -54,15 +80,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: httpbin
+  labels:
+    app: httpbin
 spec:
   selector:
     matchLabels:
-      run: httpbin
+      app: httpbin
   replicas: 2
   template:
     metadata:
       labels:
-        run: httpbin
+        app: httpbin
     spec:
       containers:
       - name: httpbin
