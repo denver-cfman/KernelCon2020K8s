@@ -257,24 +257,61 @@ cat <<EOF | kubectl apply --filename -
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
- name: httpbin-svc-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  generation: 3
+  name: rewrite
+  namespace: default
 spec:
   rules:
-  - host: 'httpbin.kernelcon2020k8s.org'
+  - host: httpbin.kernelcon2020k8s.org
     http:
       paths:
-      - path: /.*
-        backend:
+      - backend:
           serviceName: httpbin-svc
           servicePort: 8888
+        path: /
 EOF
 
 ### and lets add a host name into our "hosts" file for name resolusion (don't forget to use the same IP you found eariler)
 
 echo "192.168.1.45     httpbin.kernelcon2020k8s.org" >> /etc/hosts
 
+```
+- Now what about TLS ???
+
+```bash
+
+cat <<EOF | kubectl apply --filename -
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  generation: 3
+  name: rewrite
+  namespace: default
+spec:
+  tls:
+    - hosts:
+      - httpbin.kernelcon2020k8s.org
+      secretName: default-server-secret
+  rules:
+  - host: httpbin.kernelcon2020k8s.org
+    http:
+      paths:
+      - backend:
+          serviceName: httpbin-svc
+          servicePort: 8888
+        path: /
+EOF
+
 
 ```
+
+
+
+
 
 ## Review:
 
