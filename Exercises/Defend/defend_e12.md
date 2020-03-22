@@ -122,6 +122,7 @@ Create a user role for the "cert-manager" to use when talking to vault:
 ```bash
 vault write pki_int/roles/cert-manager \
 	allowed_domains=kernelcon2020pki.org,cluster.local,svc,pod \
+  enforce_hostnames=false \
 	allow_subdomains=true \
 	max_ttl=8760h
 ```
