@@ -4,8 +4,10 @@
 
 ![kube-proxy](/Docs/Images/k8s_networking_port-forward.png)
 
-Up until now, we have been making use of the k8s ___kube-proxy___ functionality to see our services and pods. In the real world clusters typically expose network ports via something called ___nodePorts___ or ___loadBalancer___
-Lets look at what a node and pod look like without any ___nodePorts___ setup.
+Up until now, we have been making use of the k8s ___port-forward___ functionality to see our services and pods. In the real world clusters typically expose network ports via something called ___nodePorts___ or ___loadBalancer___.
+In this exercise we will focus on "Bare Metal" scenarios, in cloud environments much of the "load balancing" confusion has been abstracted away under simple annotations, allowing admins to write one or two simple lines in there "Ingress" manifest and be done with ingress routing. I want you to know how it works so you can do it on your own. Make no mistake this is one of the most miss understood topics in kubernetes and takes people a long time to grasp.
+
+Now lets look at what a node and pod look like without any ___nodePorts___ setup.
 
 - First lets deploy something
 ```bash
@@ -264,7 +266,7 @@ metadata:
   namespace: default
 spec:
   rules:
-  - host: httpbin.kernelcon2020k8s.org
+  - host: k8s.kernelcon2020.org
     http:
       paths:
       - backend:
@@ -275,7 +277,7 @@ EOF
 
 ### and lets add a host name into our "hosts" file for name resolusion (don't forget to use the same IP you found eariler)
 
-echo "192.168.1.45     httpbin.kernelcon2020k8s.org" >> /etc/hosts
+echo "192.168.1.45     k8s.kernelcon2020.org" >> /etc/hosts
 
 ```
 - Now what about TLS ???
@@ -294,10 +296,10 @@ metadata:
 spec:
   tls:
     - hosts:
-      - httpbin.kernelcon2020k8s.org
+      - k8s.kernelcon2020.org
       secretName: default-server-secret
   rules:
-  - host: httpbin.kernelcon2020k8s.org
+  - host: k8s.kernelcon2020.org
     http:
       paths:
       - backend:
@@ -305,8 +307,6 @@ spec:
           servicePort: 8888
         path: /
 EOF
-
-
 ```
 
 
@@ -314,7 +314,12 @@ EOF
 
 
 ## Review:
+The default "North / South" networking design is to keep packets "inside" the cluster. It's only when you "attach" custom or special reverse proxy containers into the deployment that you can get packets from outside to inside and vice versa. Incidentally all the networking going "North / South" must go through ___"kube-proxy"___ if you were to do a command like ``` netstat -lnop |grep -i kube``` you would see the ___kube-proxy___ service attached to the ports we opened for 80 or 443 or what ever your NodePort was, all of it goes through ___kube-proxy___.   
+
+
 
 ## Clean up:
+  No clean up after this exercise, we want to re-use then in the next one.
+
 
 [Return to schedule](../../Docs/SCHEDULE.md)
