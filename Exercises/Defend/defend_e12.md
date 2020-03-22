@@ -119,6 +119,10 @@ vault write -format=json pki/root/sign-intermediate csr=@pki_intermediate.csr \
         format=pem_bundle ttl="43800h" \
         | jq -r '.data.certificate' > intermediate.cert.pem
 ```
+After Signing, we must re-upload the int CA signed cert back up into Vault
+```bash
+vault write pki_int/intermediate/set-signed certificate=@intermediate.cert.pem
+```
 Sweet, we have our PKI setup, now we just need to setup permissions to access it.
 Create a user role for the "cert-manager" to use when talking to vault:
 ```bash
