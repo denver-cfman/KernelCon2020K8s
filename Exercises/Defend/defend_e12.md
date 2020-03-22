@@ -83,7 +83,7 @@ vault secrets tune -max-lease-ttl=8760h pki
 Generate the root certificate
 ```bash
 vault write -field=certificate pki/root/generate/internal \
-        common_name="kernelcon2020k8s.org" \
+        common_name="kernelcon2020pki.org" \
         ttl=87600h > CA_cert.crt
 ```
 Configure the CA and CRL URLs. (This is required)
@@ -94,8 +94,8 @@ vault write pki/config/urls \
 ```
 Create a role for the CA
 ```bash
-vault write pki/roles/kernelcon2020k8s.org \
-    allowed_domains=kernelcon2020k8s.org,cluster.local,svc,pod \
+vault write pki/roles/kernelcon2020pki.org \
+    allowed_domains=kernelcon2020pki.org,cluster.local,svc,pod \
     allow_subdomains=true \
     max_ttl=72h
 ```
@@ -110,7 +110,7 @@ vault secrets tune -max-lease-ttl=61320h pki_int
 Now generate our intermediate certificate signing request ...
 ```bash
 vault write -format=json pki_int/intermediate/generate/internal \
-        common_name="kernelcon2020k8s.org Intermediate Authority" \
+        common_name="kernelcon2020pki.org Intermediate Authority" \
         | jq -r '.data.csr' > pki_intermediate.csr
 ```
 Sign it with the CA
@@ -123,7 +123,7 @@ Sweet, we have our PKI setup, now we just need to setup permissions to access it
 Create a user role for the "cert-manager" to use when talking to vault:
 ```bash
 vault write pki_int/roles/cert-manager \
-	allowed_domains=kernelcon2020k8s.org,cluster.local,svc,pod \
+	allowed_domains=kernelcon2020pki.org,cluster.local,svc,pod \
 	allow_subdomains=true \
 	max_ttl=8760h
 ```
@@ -189,27 +189,27 @@ kubectl get issuers -o wide
 NAME           READY   STATUS           AGE
 vault-issuer   True    Vault verified   140m
 ```
-Looks good, now we can actually use it. Lets say we want to create a certificate request for our wordpress site, and store the outcome in a secured object within k8s, we can set this as declarative state in a file. (locate the "wp.kernelcon2020k8s.org_cert.yaml" file in your current dir, should be "KernelCon2020K8s/Exercises/Defend/Files/defend_e12" remember)
+Looks good, now we can actually use it. Lets say we want to create a certificate request for our wordpress site, and store the outcome in a secured object within k8s, we can set this as declarative state in a file. (locate the "star.kernelcon2020.org_cert.yaml" file in your current dir, should be "KernelCon2020K8s/Exercises/Defend/Files/defend_e12" remember)
 ```bash
-cat wp.kernelcon2020k8s.org_cert.yaml
+cat star.kernelcon2020.org_cert.yaml
 
 apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
-  name: wp-kernelcon2020k8s-org
+  name: star-kernelcon2020-org
   namespace: default
 spec:
-  secretName: wp-kernelcon2020k8s-org-tls
+  secretName: star-kernelcon2020-org-tls
   issuerRef:
     name: vault-issuer
-  commonName: wp.kernelcon2020k8s.org
+  commonName: star.kernelcon2020.org
   dnsNames:
-  - wp.kernelcon2020k8s.org
+  - *.kernelcon2020.org
 ```
 See how we are able to define all the relevant attributes for the certificate via yaml. (feel free to edit as you see fit before deploying.)
 Now deploy the "certificate request" just like any other yaml file.
 ```bash
-# kubectl apply -f  wp.kernelcon2020k8s.org_cert.yaml
+# kubectl apply -f  star.kernelcon2020.org_cert.yaml
 ```
 You can now see the certificate "state" with a command like this:
 ```bash
@@ -229,9 +229,9 @@ data:
 kind: Secret
 metadata:
   annotations:
-    cert-manager.io/alt-names: wp.kernelcon2020k8s.org
-    cert-manager.io/certificate-name: wp-kernelcon2020k8s-org
-    cert-manager.io/common-name: wp.kernelcon2020k8s.org
+    cert-manager.io/alt-names: *.kernelcon2020.org
+    cert-manager.io/certificate-name: star-kernelcon2020-org
+    cert-manager.io/common-name: *.kernelcon2020.org
     cert-manager.io/ip-sans: ""
     cert-manager.io/issuer-kind: Issuer
     cert-manager.io/issuer-name: vault-issuer
