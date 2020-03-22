@@ -92,13 +92,7 @@ vault write pki/config/urls \
         issuing_certificates="http://127.0.0.1:8200/v1/pki/ca" \
         crl_distribution_points="http://127.0.0.1:8200/v1/pki/crl"
 ```
-Create a role for the CA
-```bash
-vault write pki/roles/kernelcon2020pki.org \
-    allowed_domains=kernelcon2020pki.org,cluster.local,svc,pod \
-    allow_subdomains=true \
-    max_ttl=72h
-```
+
 Enable pki_int path for intermediate CA
 ```bash
 vault secrets enable -path=pki_int pki
