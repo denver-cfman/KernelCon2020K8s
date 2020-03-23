@@ -31,15 +31,13 @@ cat <<EOF | kubectl apply --filename -
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
   name: wordpress
   namespace: default
 spec:
   tls:
     - hosts:
       - k8s.kernelcon2020.org
-      secretName: default-server-secret
+      secretName: star-kernelcon2020-org-tls
   rules:
   - host: k8s.kernelcon2020.org
     http:
@@ -55,27 +53,27 @@ You should be able to access the wordpress site via the FQDN we setup in the las
 
 
 ```bash
+
 cat <<EOF | kubectl apply --filename -
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/enable-modsecurity: "true"
     nginx.ingress.kubernetes.io/modsecurity-snippet: |
       SecRuleEngine On
       SecRequestBodyAccess On
       SecAuditEngine RelevantOnly
       SecAuditLogParts ABIJDEFHZ
-      SecAuditLog /var/log/nginx/modsec_audit.log
-      SecRule REQUEST_HEADERS:User-Agent "kernelcon-scanner" "log,deny,id:107,status:403,msg:'KernelCon Scanner Identified'"
+      SecAuditLog /var/log/modsec_audit.log
+      SecRule REQUEST_HEADERS:User-Agent "kernelcon-scanner" "log,deny,id:107,status:403,msg:\'KernelCon Scanner Identified\'"
   name: wordpress
   namespace: default
 spec:
   tls:
     - hosts:
       - k8s.kernelcon2020.org
-      secretName: default-server-secret
+      secretName: star-kernelcon2020-org-tls
   rules:
   - host: k8s.kernelcon2020.org
     http:
@@ -85,11 +83,50 @@ spec:
           servicePort: 80
         path: /
 EOF
+
 ```
 
-``bash
+- Foo
+
+```bash
 ### Log file review
-kubectl exec -it -n nginx-ingress $(kubectl -n nginx-ingress get pods -l app=nginx-ingress -o=jsonpath='{.items[0].metadata.name}') cat /var/log/modsec_audit.log
+kubectl exec -it -n ingress-nginx $(kubectl -n ingress-nginx get pods -o=jsonpath='{.items[0].metadata.name}') cat /var/log/modsec_audit.log
+
+```
+- Bar
+
+```bash
+
+cat <<EOF | kubectl apply --filename -
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/allow-backend-server-header: "false"
+    nginx.ingress.kubernetes.io/enable-modsecurity: "true"
+    nginx.ingress.kubernetes.io/enable-owasp-modsecurity-crs: "true"
+    nginx.ingress.kubernetes.io/modsecurity-snippet: |
+      SecRuleEngine On
+      SecRequestBodyAccess On
+      SecAuditEngine RelevantOnly
+      SecAuditLogParts ABIJDEFHZ
+      SecAuditLog /var/log/modsec_audit.log
+  name: wordpress
+  namespace: default
+spec:
+  tls:
+    - hosts:
+      - k8s.kernelcon2020.org
+      secretName: star-kernelcon2020-org-tls
+  rules:
+  - host: k8s.kernelcon2020.org
+    http:
+      paths:
+      - backend:
+          serviceName: wp-svc
+          servicePort: 80
+        path: /
+EOF
 
 ```
 

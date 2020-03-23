@@ -186,9 +186,8 @@ kubectl apply -f 01-ns-and-sa.yaml
 kubectl apply -f 02-rbac.yaml
 kubectl apply -f 03-default-server-secret.yaml
 kubectl apply -f 04-nginx-config.yaml
-kubectl apply -f 05-custom-resource-definitions.yaml
-kubectl apply -f 06-nginx-ingress.yaml
-kubectl apply -f 07-loadbalancer.yaml
+kubectl apply -f 05-nginx-ingress.yaml
+kubectl apply -f 06-loadbalancer.yaml
 ```
 - Lets go through them and why we need them. (feel free to use the ```cat``` command to look at any of the files i.e. ```cat file.yaml```)
 
@@ -297,7 +296,7 @@ spec:
   tls:
     - hosts:
       - k8s.kernelcon2020.org
-      secretName: default-server-secret
+      secretName: star-kernelcon2020-org-tls
   rules:
   - host: k8s.kernelcon2020.org
     http:
