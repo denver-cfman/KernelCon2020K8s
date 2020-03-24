@@ -13,11 +13,11 @@ kubectl apply -f setup.yaml
 - once running you should be able to access the site through the ingress port [https://k8s.kernelcon2020.org/](https://k8s.kernelcon2020.org/)
 - login with the credentials ___"admin"___ and ___"admin"___
 
-![Login](Files/images/dvwa_login1.png)
+![Login1](Files/images/dvwa_login1.png)
 
-- once
+- once logged in, scroll to the bottom and click the "" button to initialize the DB
 
-
+![Login2](Files/images/dvwa_login2.png)
 
 ### MSF Setup
 
