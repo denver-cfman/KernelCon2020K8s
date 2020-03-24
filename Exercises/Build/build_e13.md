@@ -203,20 +203,20 @@ kubectl apply -f 06-loadbalancer.yaml
 
 ### After your deployment you should have a new namespace full of stuff, something like this:
 ```bash
-kubectl -n nginx-ingress get all
+kubectl -n ingress-nginx get all
 
 
 NAME                                 READY   STATUS    RESTARTS   AGE
-pod/nginx-ingress-57cdc75bdb-cpk7b   1/1     Running   0          48s
+pod/ingress-nginx-57cdc75bdb-cpk7b   1/1     Running   0          48s
 
 NAME                    TYPE           CLUSTER-IP    EXTERNAL-IP   PORT(S)                      AGE
-service/nginx-ingress   LoadBalancer   10.96.56.56   <pending>     80:32010/TCP,443:31590/TCP   45s
+service/ingress-nginx   LoadBalancer   10.96.56.56   <pending>     80:32010/TCP,443:31590/TCP   45s
 
 NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/nginx-ingress   1/1     1            1           48s
+deployment.apps/ingress-nginx   1/1     1            1           48s
 
 NAME                                       DESIRED   CURRENT   READY   AGE
-replicaset.apps/nginx-ingress-57cdc75bdb   1         1         1       48s
+replicaset.apps/ingress-nginx-57cdc75bdb   1         1         1       48s
 ```
 - wow look at that, a new thing. Under the ___"EXTERNAL-IP"___ column there is a ___"pending"___ note. (what does that mean?)
 
@@ -231,16 +231,16 @@ ifconfig eth0 |grep -i "inet " |awk '{print $2}'
 
 ### now take the IP you just got from the last command and 
 
-kubectl patch svc nginx-ingress \
-        -n nginx-ingress \
+kubectl patch svc ingress-nginx \
+        -n ingress-nginx \
         -p '{"spec": {"type": "LoadBalancer", "externalIPs":["192.168.1.45"]}}'
 
 ### now lets review the service again
 
-kubectl -n nginx-ingress get svc
+kubectl -n ingress-nginx get svc
 
 NAME            TYPE           CLUSTER-IP    EXTERNAL-IP    PORT(S)                      AGE
-nginx-ingress   LoadBalancer   10.96.56.56   192.168.1.45   80:32010/TCP,443:31590/TCP   32m
+ingress-nginx   LoadBalancer   10.96.56.56   192.168.1.45   80:32010/TCP,443:31590/TCP   32m
 ```
 - see that now the ___"EXTERNAL-IP"___ is now a real IP not ___pending___
 - cool lets see if we can hit the site
