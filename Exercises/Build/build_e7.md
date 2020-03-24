@@ -24,7 +24,8 @@ minikube stop && minikube delete && rm -Rfv ~/.kube && rm -Rfv ~/.minikube && rm
 - Then we start your cluster via __minikube__
 ```bash
 ### start minikube (first time is just to download images etc.)
-CHANGE_MINIKUBE_NONE_USER=true minikube start --vm-driver=none --network-plugin=cni --enable-default-cni
+CHANGE_MINIKUBE_NONE_USER=true minikube start --vm-driver=none \
+                        --network-plugin=cni --enable-default-cni
 
 ### now stop minikube
 minikube stop
