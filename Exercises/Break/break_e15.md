@@ -15,9 +15,14 @@ kubectl apply -f setup.yaml
 
 ![Login1](Files/images/dvwa_login1.png)
 
-- once logged in, scroll to the bottom and click the "" button to initialize the DB
+- once logged in, scroll to the bottom and click the "Create / Reset DB" button to initialize the DB
 
 ![Login2](Files/images/dvwa_login2.png)
+
+- When that task is complete, log back in as ___admin___ and ___password___
+
+- continue to "MSF Setup" if you wish to breach the container via remote shell. 
+- or skip down to the [Shell](#shell)
 
 ### MSF Setup
 
@@ -66,6 +71,7 @@ shell
 /bin/sh -i
 
 ```
+# Shell
 
 #### Note by default (unless you change it) k8s will auto mount the default service account for a namespace INTO EVERY POD in that namespace!!!
 
