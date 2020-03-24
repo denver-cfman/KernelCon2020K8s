@@ -24,8 +24,7 @@ minikube stop && minikube delete && rm -Rfv ~/.kube && rm -Rfv ~/.minikube && rm
 - Then we start your cluster via __minikube__
 ```bash
 ### start minikube (first time is just to download images etc.)
-CHANGE_MINIKUBE_NONE_USER=true minikube start --vm-driver=none \
-                        --network-plugin=cni --enable-default-cni
+CHANGE_MINIKUBE_NONE_USER=true minikube start --vm-driver=none
 
 ### now stop minikube
 minikube stop
@@ -44,8 +43,7 @@ EOF
 
 CHANGE_MINIKUBE_NONE_USER=true minikube start --vm-driver=none \
     --extra-config=apiserver.audit-policy-file=/etc/ssl/certs/audit-policy.yaml \
-    --extra-config=apiserver.audit-log-path=- \
-    --network-plugin=cni --enable-default-cni
+    --extra-config=apiserver.audit-log-path=-
 
 
 ⌛  Waiting for cluster to come online ...
