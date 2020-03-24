@@ -1,7 +1,9 @@
 # Exercise 14 (Integrated Defense)
 
 ## Preface:
-In my opinion, defense strategies should be coupled with the thing that they are meant to defend. In this example we have a simple web application, one that we know is risky or may be vulnerable to deploy. Therefore we can implement a defense control out in fount of this server. Something that doesn't interfere with the App or how it works, even how it's deployed.
+In my opinion, defense strategies should be coupled with the thing that they are meant to defend. In this example we have a simple web application, one that we know is risky or may be vulnerable to deploying. Therefore we can implement a defense control out in fount of this server. Something that doesn't interfere with the App or how it works, even how it's deployed. 
+
+The design of this exercise is to show you that you can integrate perimeter security into kubernetes and your deployments.
 
 You should still have your wordpress app and database still running in your cluster.
 ```bash
@@ -86,55 +88,31 @@ EOF
 
 ```
 
-- Foo
+- now lets use ```curl``` to hit the site, this should trigger the WAF and record an event.
+
+```bash
+curl -k -vv -H "User-Agent: kernelcon-scanner" https://k8s.kernelcon2020.org/
+```
+
+- now check the logs, you should see your events.
 
 ```bash
 ### Log file review
 kubectl exec -it -n ingress-nginx $(kubectl -n ingress-nginx get pods -o=jsonpath='{.items[0].metadata.name}') cat /var/log/modsec_audit.log
 
 ```
-- Bar
 
-```bash
-
-cat <<EOF | kubectl apply --filename -
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  annotations:
-    nginx.ingress.kubernetes.io/allow-backend-server-header: "false"
-    nginx.ingress.kubernetes.io/enable-modsecurity: "true"
-    nginx.ingress.kubernetes.io/enable-owasp-modsecurity-crs: "true"
-    nginx.ingress.kubernetes.io/modsecurity-snippet: |
-      SecRuleEngine On
-      SecRequestBodyAccess On
-      SecAuditEngine RelevantOnly
-      SecAuditLogParts ABIJDEFHZ
-      SecAuditLog /var/log/modsec_audit.log
-  name: wordpress
-  namespace: default
-spec:
-  tls:
-    - hosts:
-      - k8s.kernelcon2020.org
-      secretName: star-kernelcon2020-org-tls
-  rules:
-  - host: k8s.kernelcon2020.org
-    http:
-      paths:
-      - backend:
-          serviceName: wp-svc
-          servicePort: 80
-        path: /
-EOF
-
-```
+#### Note: mod_security ,by default is setup to monitor triggered events. Core Rule Set can easily be enabled by adding the ___nginx.ingress.kubernetes.io/enable-owasp-modsecurity-crs: "true"___ annotation. If you want to expand on this technique, have a look at the [module](https://modsecurity.org/crs/) to discover way you can integrate blocking and other custom rules.
 
 
 ## Review:
+There are many open source projects contributing and integrating code into the microservices ecosystem. Likely you fine one specific to the needs of your code and may already have a kubernetes setup or configuration. I've shied away form calling these "bolt-on" solutions and instead prefer to call them modular security improvements.
 
 
 ## Clean up:
-
+FOr now let's just kill the "Ingress" object mapped to our wordpress service.
+```bash
+kubectl delete ing wordpress
+```
 
  [Return to schedule](../../Docs/SCHEDULE.md)
