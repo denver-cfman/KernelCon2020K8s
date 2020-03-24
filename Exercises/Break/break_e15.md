@@ -1,7 +1,9 @@
 # Exercise 15 (Access Control)
 
 ## Preface:
-This exercise is not meant to provide you with an extensive "hacking" experience! We all know the majority of pen testing issues come from misconfiguration. Therefore we assume this container is exploitable so we will focus on post exploitation. If you do not wish to do any of the ___metasploit___ steeps, just skip to [This section]() to pick it up at the shell.
+This exercise is not meant to provide you with an extensive "hacking" experience! We all know the majority of pen testing issues come from misconfiguration. Therefore we assume this container is exploitable so we will focus on post exploitation. If you do not wish to do any of the ___metasploit___ steeps, just skip to [This section](#shell) to pick it up at the shell.
+
+Note you will still need to setup the container etc.
 
 ### Env Setup
 - cd into the ``` KernelCon2020K8s/Exercises/Break/Files/break_e15 ``` folder and deploy the pod we will be working with.
@@ -55,6 +57,15 @@ msf> set lport 4545
 msf> set ExitOnSession false
 msf> exploit -j
 ```
+
+# Setup remote shell
+- from within the "DVWA" gui, locate the "file upload" button and click it.
+
+![File Upload](Files/images/dvwa_file_upload1.png)
+
+- you should have an ___msfvenom___ payload on your Desktop for earlier, upload it and take not of the destination.
+
+![File Upload](Files/images/dvwa_file_upload2.png)
 
 - you should see a session start as soon as you run the command
 - enter the session, then enter the shell
