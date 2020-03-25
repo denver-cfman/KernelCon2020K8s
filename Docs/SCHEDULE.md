@@ -26,24 +26,24 @@
 	* [Exercise_10](../Exercises/Build/build_e10.md) - [Scaling workloads](../Exercises/Build/build_e10.md)
 	* [Exercise_11](../Exercises/Build/build_e11.md) - [Cluster key infrastructure](../Exercises/Build/build_e11.md)
 	* [Exercise_12](../Exercises/Defend/defend_e12.md) - [PKI, a better way](../Exercises/Defend/defend_e12.md)
-	* Exercise_13 - Cluster authentication
-	* Exercise_14 - Attacking  Cluster authentication
+	* Exercise_13 - [Cluster authentication](../Exercises/Build/build_e13.md)
+	* Exercise_14 - [Attacking  Cluster authentication](../Exercises/Break/break_e14.md)
 	
 * 2pm -> 3pm
-	* Exercise_15 - Ingress
-	* Exercise_16 - Egress
-	* Exercise_17 - East / West
-	* Exercise_18 - Attacking Cluster networking
-	* Exercise_19 - Defending Cluster networking
+	* Exercise_15 - [Ingress](../Exercises/Build/build_e15.md)
+	* Exercise_16 - [Ingress Defense](../Exercises/Defend/defend_e16.md)
+	* Exercise_17 - [East / West](../Exercises/Defend/build_e17.md)
+	* Exercise_18 - [Attacking Cluster networking](../Exercises/Break/build_e18.md)
+	* Exercise_19 - [Defending Cluster networking](../Exercises/Defend/build_e19.md)
 	
 * 3pm -> 4pm  (With 15 min break)
-	* Exercise_20 - How do secrets work
-	* Discussion  - Common tools and tech used for secrets.
-	* Exercise_21 - Attacking secret storage
-	* Exercise_22 - Creative secret integration
+	* Exercise_20 - [How do secrets work](../Exercises/Build/build_e20.md)
+	* Discussion  - [Common tools and tech used for secrets.](../Exercises/Build/build_e2.md)
+	* Exercise_21 - [Attacking secret storage](../Exercises/Break/build_e21.md)
+	* Exercise_22 - [Creative secret integration](../Exercises/Defend/build_e22.md)
 	
 * 4pm -> 5pm
-	* Exercise_23 - Kubectl plugins
-	* Exercise_24 - Custom resource definitions
-	* Exercise_25 - Pod Security policies
-    * Exercise_26 - Attacking Pod Security policies
+	* Exercise_23 - [Kubectl plugins](../Exercises/Build/build_e23.md)
+	* Exercise_24 - [Custom resource definitions](../Exercises/Build/build_e24.md)
+	* Exercise_25 - [Pod Security policies](../Exercises/Defend/build_e25.md)
+    * Exercise_26 - [Attacking Pod Security policies](../Exercises/Break/build_e26.md)
