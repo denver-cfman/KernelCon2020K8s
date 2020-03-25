@@ -172,7 +172,7 @@ kubectl patch svc httpbin-svc \
 ### For the purposes of this exercise, I'v picked [Nginx](https://www.nginx.com/products/nginx/kubernetes-ingress-controller/) as the ingress controller because I'm going to use it in several segments and want to minimize the amount of commands. However in a production environment, I would use both an ingress controller, application gateway (something like [Gloo](https://www.solo.io/products/gloo/)) AND a service mesh like [Istio](https://istio.io/). All can be used interchangeably and with each other, giving you many benefits from service and deployment control from a traffic perspective to upgrade redundancy. They extend kubernetes rolling or staged deployments to allow you to do techniques like [canary](https://whatis.techtarget.com/definition/canary-canary-testing) or [Blue / Green](https://en.wikipedia.org/wiki/Blue-green_deployment) code deployments.
 
 ### Enough talk, lets do it.
-- Change directory into the ``` KernelCon2020K8s/Exercises/Build/Files/build_e13 ``` dir and ``` ls ```
+- Change directory into the ``` KernelCon2020K8s/Exercises/Build/Files/build_e15 ``` dir and ``` ls ```
 ```bash
 ls
 
