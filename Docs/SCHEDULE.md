@@ -26,12 +26,12 @@
 	* [Exercise_10](../Exercises/Build/build_e10.md) - [Scaling workloads](../Exercises/Build/build_e10.md)
 	* [Exercise_11](../Exercises/Build/build_e11.md) - [Cluster key infrastructure](../Exercises/Build/build_e11.md)
 	* [Exercise_12](../Exercises/Defend/defend_e12.md) - [PKI, a better way](../Exercises/Defend/defend_e12.md)
-	* Exercise_13 - Cluster authentication
+	* Exercise_13 - [Cluster authentication](../Exercises/Build/build_e13.md)
 	* Exercise_14 - [Attacking  Cluster authentication](../Exercises/Break/break_e14.md)
 	
 * 2pm -> 3pm
 	* Exercise_15 - [Ingress](../Exercises/Build/build_e15.md)
-	* Exercise_16 - [Egress](../Exercises/Build/build_e16.md)
+	* Exercise_16 - [Ingress Defense](../Exercises/Defend/defend_e16.md)
 	* Exercise_17 - [East / West](../Exercises/Defend/build_e17.md)
 	* Exercise_18 - [Attacking Cluster networking](../Exercises/Break/build_e18.md)
 	* Exercise_19 - [Defending Cluster networking](../Exercises/Defend/build_e19.md)
